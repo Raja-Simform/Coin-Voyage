@@ -1,0 +1,38 @@
+{
+  "name": "coin-voyage",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel ./index.html ",
+    "prepare": "husky",
+    "lint": "eslint src",
+    "build": "parcel build ./index.html --public-url ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raja-Simform/Coin-Voyage.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Raja-Simform/Coin-Voyage/issues"
+  },
+  "homepage": "https://github.com/Raja-Simform/Coin-Voyage#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.23.0",
+    "eslint": "^9.23.0",
+    "husky": "^9.1.7",
+    "parcel": "^2.14.4",
+    "prettier": "3.5.3",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.28.0"
+  },
+  "lint-staged": {
+    "**/*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write --ignore-unknown"
+    ]
+  }
+}
