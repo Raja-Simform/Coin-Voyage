@@ -1,10 +1,9 @@
-// type Player = {
-//         id:number;
-//         position:Position;
-//         score:number;
-    
-// }
-type  Pos1={
+type Player = {
+        id:number;
+        position:Pos;
+        score:number;
+}
+type  Pos={
     row: number,
     col: number,
   }
@@ -23,19 +22,30 @@ export class Utility{
     const value3=this.clearPoaition(value2,value1);
     console.log({value3,value2,})//return to inshiya contoller
     console.log(this.totalScore);//to check when game is over exceeding total score;
+     
+    const demo:Player={
+       id:2,
+       position:{
+        row:2,
+        col:3
+       },
+       score:20
+    }
+    const value4=this.addScore(value1,demo);
+    console.log(value4);
 
            
     }
-    clearPoaition(position:Pos1[],grid:number[][]){
+    clearPoaition(position:Pos[],grid:number[][]){
          for(let i=0;i<position.length;i++){
              this.totalScore-=grid[position[i].row][position[i].col];
-             grid[position[i].row][position[i].col]=-1;
+             grid[position[i].row][position[i].col]=0;
          }
          return grid;
     }
     genrateRandom(playerSize:number,arrSize:number){
         const arr:number[]=[];
-        const position:Pos1[]=[];
+        const position:Pos[]=[];
         let numx=0;
         let numy=0;
         while(playerSize){
@@ -80,18 +90,16 @@ export class Utility{
         return arr;
     }
     
-
-
-    
    
-    // addScore(arr:number[][],){
-    //        player.count+=arr[player.posX][player.posY];
-    //     //    if( arr[player.posX][player.posY]){
-    //     //     gameover++;
-    //     //    }
-    //        arr[player.posX][player.posY]=0;
-    //        return {arr,player};
-    // }
+    addScore(arr:number[][],player:Player){
+        player.score+=arr[player.position.row][player.position.col];
+        this.totalScore-=arr[player.position.row][player.position.col];
+        arr[player.position.row][player.position.col]=0;
+        if(this.totalScore===0){
+            console.log("game over");
+        }
+        return {arr,player};
+    }
 
 }
 // new Utility(4,2);
