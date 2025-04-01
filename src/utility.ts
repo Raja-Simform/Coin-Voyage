@@ -1,9 +1,13 @@
 // type Player = {
-//     count: number,
-//     posX: number,
-//     posY: number
+//         id:number;
+//         position:Position;
+//         score:number;
+    
 // }
-
+type  Pos1={
+    row: number,
+    col: number,
+  }
 export class Utility{
 
     private arrSize:number;
@@ -22,7 +26,7 @@ export class Utility{
 
            
     }
-    clearPoaition(position:object[],grid:number[][]){
+    clearPoaition(position:Pos1[],grid:number[][]){
          for(let i=0;i<position.length;i++){
              this.totalScore-=grid[position[i].row][position[i].col];
              grid[position[i].row][position[i].col]=-1;
@@ -31,7 +35,7 @@ export class Utility{
     }
     genrateRandom(playerSize:number,arrSize:number){
         const arr:number[]=[];
-        const position:object[]=[];
+        const position:Pos1[]=[];
         let numx=0;
         let numy=0;
         while(playerSize){
@@ -62,7 +66,6 @@ export class Utility{
                     const sum=Math.floor(Math.random()*10);
                     if(sum===0){
                         arr[a][b]=0;
-                        // gameOver++;
                     }
                     else if(sum%2===0){
                         arr[a][b]=3;
@@ -81,7 +84,7 @@ export class Utility{
 
     
    
-    // addScore(arr:number[][], player: Player){
+    // addScore(arr:number[][],){
     //        player.count+=arr[player.posX][player.posY];
     //     //    if( arr[player.posX][player.posY]){
     //     //     gameover++;
