@@ -94,17 +94,17 @@ export class BoardView {
         for (let j = 0; j < coins[i].length; j++) {
           const cell = document.createElement('div');
           cell.classList.add('grid-item');
+          cell.textContent = coins[i][j].toString();
+          gameBoard.appendChild(cell);
           for (let k = 0; k < player.length; k++) {
             if (player[k].position.x === i && player[k].position.y === j) {
+              console.log('enter');
               cell.innerHTML = `
               <div class="player-icon">
               </div>`;
               gameBoard.appendChild(cell);
-              break;
             }
           }
-          cell.textContent = coins[i][j].toString();
-          gameBoard.appendChild(cell);
         }
       }
     }

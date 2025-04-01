@@ -73,6 +73,10 @@ main {
   color: aqua;
 }
 
+.player-icon::before {
+  content: 'hih';
+}
+
 @media only screen and (min-width: 600px) {
   .grid-item {
     width: 40px;
