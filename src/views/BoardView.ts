@@ -7,6 +7,7 @@ import {
   MEDIUM,
   MEDIUM_MATRIX_COLUMNS,
   MEDIUM_MATRIX_ROWS,
+  NUMBER_OF_DEFAULT_USERS,
 } from '../constants';
 import { Board } from '../models/GameBoardModel';
 import { Player } from '../models/PlayerModel';
@@ -70,7 +71,7 @@ export class BoardView {
     if (turn) turn.textContent = 'Turn:';
   }
 
-  totalPlayers() {
+  totalPlayers(): number {
     const numberOfPlayers: HTMLSelectElement | null =
       document.querySelector('#players');
     if (numberOfPlayers) {
@@ -81,6 +82,7 @@ export class BoardView {
         }
       });
     }
+    return NUMBER_OF_DEFAULT_USERS;
   }
 
   createGameBoard(coins: number[][], player: Array<Player>) {

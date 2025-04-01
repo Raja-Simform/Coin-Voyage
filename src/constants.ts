@@ -7,3 +7,4 @@ export const HARD_MATRIX_COLUMNS = 8;
 export const EASY = 'Easy';
 export const MEDIUM = 'Medium';
 export const HARD = 'Hard';
+export const NUMBER_OF_DEFAULT_USERS = 2;
