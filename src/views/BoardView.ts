@@ -2,7 +2,6 @@ import {
   EASY,
   EASY_MATRIX_COLUMNS,
   EASY_MATRIX_ROWS,
-  HARD,
   HARD_MATRIX_COLUMNS,
   HARD_MATRIX_ROWS,
   MEDIUM,
@@ -10,6 +9,7 @@ import {
   MEDIUM_MATRIX_ROWS,
 } from '../constants';
 import { Board } from '../models/GameBoardModel';
+import { Player } from '../models/PlayerModel';
 
 export class BoardView {
   public difficultySelection: HTMLElement;
@@ -56,15 +56,6 @@ export class BoardView {
       const btnValue = target.closest('button')?.value;
       if (btnValue) {
         this.difficulty = btnValue;
-        if (this.difficulty === EASY) {
-          this.displayGame(EASY_MATRIX_ROWS, EASY_MATRIX_COLUMNS);
-        }
-        if (this.difficulty === MEDIUM) {
-          this.displayGame(MEDIUM_MATRIX_ROWS, MEDIUM_MATRIX_COLUMNS);
-        }
-        if (this.difficulty === HARD) {
-          this.displayGame(HARD_MATRIX_ROWS, HARD_MATRIX_COLUMNS);
-        }
       }
     }
   }
@@ -79,27 +70,50 @@ export class BoardView {
     if (turn) turn.textContent = 'Turn:';
   }
 
-  createGameBoard(rowSize: number, columnSize: number) {
+  totalPlayers() {
+    const numberOfPlayers: HTMLSelectElement | null =
+      document.querySelector('#players');
+    if (numberOfPlayers) {
+      numberOfPlayers.addEventListener('change', (e) => {
+        const target = e.target;
+        if (target instanceof HTMLSelectElement) {
+          console.log(target.value);
+
+          return target.value;
+        }
+      });
+    }
+  }
+
+  createGameBoard(coins: number[][], player: Array<Player>) {
     const gameBoard: HTMLDivElement | null =
       document.querySelector('#game-board');
     if (gameBoard) {
       gameBoard.innerHTML = '';
-
-      gameBoard.style.gridTemplateColumns = `repeat(${columnSize}, 40px)`;
-      gameBoard.style.gridTemplateRows = `repeat(${rowSize}, 40px)`;
-      console.log(gameBoard.style.gridTemplateColumns);
-
-      for (let i = 0; i < rowSize * columnSize; i++) {
-        const cell = document.createElement('div');
-        cell.classList.add('grid-item');
-        cell.textContent = (i + 1).toString();
-        gameBoard.appendChild(cell);
+      gameBoard.style.gridTemplateColumns = `repeat(${coins.length}, 40px)`;
+      gameBoard.style.gridTemplateRows = `repeat(${coins[0].length}, 40px)`;
+      for (let i = 0; i < coins.length; i++) {
+        for (let j = 0; j < coins[i].length; j++) {
+          const cell = document.createElement('div');
+          cell.classList.add('grid-item');
+          for (let k = 0; k < player.length; k++) {
+            if (player[k].position.x === i && player[k].position.y === j) {
+              cell.innerHTML = `
+              <div class="player-icon">
+              </div>`;
+              gameBoard.appendChild(cell);
+              break;
+            }
+          }
+          cell.textContent = coins[i][j].toString();
+          gameBoard.appendChild(cell);
+        }
       }
     }
   }
 
-  displayGame(rowSize: number, columnSize: number) {
-    this.createGameBoard(rowSize, columnSize);
+  displayGame(coins: number[][], player: Array<Player>) {
+    this.createGameBoard(coins, player);
     this.displayScore();
     this.displayTurn();
   }

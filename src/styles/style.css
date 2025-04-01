@@ -38,7 +38,8 @@ main {
   margin: 0 10px;
 }
 
-.difficulty-selection {
+.difficulty-selection,
+.select-players {
   max-width: 600px;
   width: 100%;
   margin: 20px auto;
@@ -63,6 +64,13 @@ main {
   border: 1px solid #000;
   font-size: 18px;
   font-weight: bold;
+}
+
+.player-icon {
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  color: aqua;
 }
 
 @media only screen and (min-width: 600px) {
