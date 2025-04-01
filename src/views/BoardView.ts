@@ -77,8 +77,6 @@ export class BoardView {
       numberOfPlayers.addEventListener('change', (e) => {
         const target = e.target;
         if (target instanceof HTMLSelectElement) {
-          console.log(target.value);
-
           return target.value;
         }
       });
