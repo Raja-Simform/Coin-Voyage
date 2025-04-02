@@ -6,7 +6,7 @@ export class Utility{
     clearPosition(position:Position[],grid:number[][]){
          for(let i=0;i<position.length;i++){
              this.totalScore-=grid[position[i].x][position[i].y];
-             grid[position[i].x][position[i].y]=-1;
+             grid[position[i].x][position[i].y]=0;
          }
          return grid;
     }

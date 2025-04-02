@@ -107,7 +107,7 @@ export class PlayerController {
   getGrid(arrObj: GridRowAndCol) {
     const coinGrid = this.utility.generateGridCoin(arrObj);
     this.playerPosition = this.utility.genrateRandom(this.totalPlayers, arrObj);
-    return this.utility.clearPosition(this.playerPosition, coinGrid);
+    return this.utility.clearPosition(this.playerPosition,coinGrid)
   }
   handleTurn() {
     const currentIndex = this.players.findIndex((player) => player.turn);
