@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+nav {
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  gap: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 26px;
+}
+
+button {
+  padding: 5px 10px;
+}
+
+main {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.scores,
+.turn {
+  margin: 0 10px;
+}
+
+#game-board {
+  display: grid;
+
+  max-width: 800px;
+  width: 100%;
+  margin: 20px auto;
+  justify-content: center;
+}
+
+.grid-item {
+  background-color: lightblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#player0 {
+  height: 15px;
+  width: 15px;
+  background: url('../assets/player0.svg');
+  background-size: contain;
+}
+
+#player1 {
+  height: 15px;
+  width: 15px;
+  background: url('../assets/player1.svg');
+  background-size: contain;
+}
+#player2 {
+  height: 15px;
+  width: 15px;
+  background: url('../assets/player2.svg');
+  background-size: contain;
+}
+#player3 {
+  height: 15px;
+  width: 15px;
+  background: url('../assets/player3.svg');
+  background-size: contain;
+}
+
+#controller {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+#controller img {
+  width: 40px;
+}
+@media only screen and (min-width: 600px) {
+  .grid-item {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.start-game-requirements {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 650px;
+  gap: 20px;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 16px;
+}
+
+#start {
+  background-color: rgb(28, 126, 4);
+  width: 50px;
+  color: white;
+  border-radius: 8px;
+}
+
+#controller {
+  display: none;
+}
+
+select {
+  border-radius: 4px;
+  padding: 5px 20px;
+}

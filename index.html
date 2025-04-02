@@ -1,11 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="./src/index.ts"></script>
-</head>
-<body>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coin Voyage</title>
+    <link rel="stylesheet" href="./src/styles/style.css" />
+  </head>
+  <body>
+    <nav>
+      <a href="#">Coin-Voyage</a> <button class="restart">Restart</button>
+    </nav>
+    <div class="start-game-requirements">
+      <div class="difficulty-selection">
+        <label for="difficulty">Select difficulty level:</label>
+        <select name="players" id="difficulty-selection">
+          <option hidden>Difficulty level</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
+      </div>
+      <div class="select-players">
+        <label for="players">Select number of players:</label>
+        <select name="players" id="players">
+          <option hidden>Players</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+
+      <button id="start">Start</button>
+    </div>
+
+    <main>
+      <ul class="scores"></ul>
+      <ul class="turn"></ul>
+      <div id="game-board"></div>
+      <div id="controller">
+        <button class="up" name="up">
+          <img src="./src/assets/up.svg" alt="Move Up" />
+        </button>
+        <button class="down" name="down">
+          <img src="./src/assets/down.svg" alt="Move Down" />
+        </button>
+        <button class="left" name="left">
+          <img src="./src/assets/left.svg" alt="Move Left" />
+        </button>
+        <button class="right" name="right">
+          <img src="./src/assets/right.svg" alt="Move Right" />
+        </button>
+      </div>
+    </main>
+  </body>
+  <script type="module" src="./src/index.ts"></script>
 </html>
