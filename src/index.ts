@@ -29,9 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     '.difficulty-selection',
   ) as HTMLInputElement;
   if (difficultySelection) {
-    difficultySelection.addEventListener(
-      'click',
-      (e:Event)=>{playerController.selectGameDifficulty(e)}
-    );
+    difficultySelection.addEventListener('click', (e: Event) => {
+      playerController.selectGameDifficulty(e);
+    });
   }
 });

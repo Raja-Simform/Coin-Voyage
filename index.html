@@ -10,25 +10,32 @@
     <nav>
       <a href="#">Coin-Voyage</a> <button class="restart">Restart</button>
     </nav>
-    <div class="difficulty-selection">
-      <button title="Easy" value="Easy">Easy</button>
-      <button title="Medium" value="Medium">Medium</button>
-      <button title="Hard" value="Hard">Hard</button>
-    </div>
-    <div class="select-players">
-      <label for="players">Select number of players:</label>
-      <select name="players" id="players">
-        <option hidden>select the number of players</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
+    <div class="start-game-requirements">
+      <div class="difficulty-selection">
+        <label for="difficulty">Select difficulty level:</label>
+        <select name="players" id="difficulty-selection">
+          <option hidden>Difficulty level</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
+      </div>
+      <div class="select-players">
+        <label for="players">Select number of players:</label>
+        <select name="players" id="players">
+          <option hidden>Players</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+
       <button id="start">Start</button>
     </div>
 
     <main>
-      <div class="scores"></div>
-      <div class="turn"></div>
+      <ul class="scores"></ul>
+      <ul class="turn"></ul>
       <div id="game-board"></div>
       <div id="controller">
         <button class="up" name="up">
