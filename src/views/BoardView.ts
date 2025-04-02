@@ -61,6 +61,22 @@ export class BoardView {
     }
   }
 
+  displayScore(player: Player[]) {
+    const score = document.querySelector('.scores');
+    if (score) {
+      score.textContent = 'Scores:';
+      for (let i = 0; i < player.length; i++) {
+        const playerScore = document.createElement('li');
+        playerScore.style.display = 'flex';
+        const PlayerImageDiv = document.createElement('div');
+        PlayerImageDiv.className = 'player-icon';
+        PlayerImageDiv.id = `player${player[i].id}`;
+        playerScore.append(PlayerImageDiv, `: ${player[i].score}`);
+        score.append(playerScore);
+      }
+    }
+  }
+
   displayTurn(players: Array<Player>) {
     const turn = document.querySelector('.turn');
     if (turn) {
@@ -115,7 +131,33 @@ export class BoardView {
 
   displayGame(coins: number[][], player: Array<Player>) {
     this.createGameBoard(coins, player);
+    this.displayScore(player);
     this.displayTurn(player);
     this.displayController();
+  }
+
+  checkIfGameOver(player: Player[]) {
+    console.log(player[0].id);
+    const popup: HTMLElement | null = document.querySelector('.popup');
+    let winnerId = -100;
+    for (let i = 0; i < player.length; i++) {
+      if (player[i].score > winnerId) {
+        winnerId = player[i].id;
+      }
+    }
+    const winner = document.querySelector('.winnerOfGame');
+    if (winner) {
+      winner.innerHTML = `
+        <div id="player${winnerId}" class="player-icon"></div>
+      `;
+    }
+    popup?.classList.add('show-popup');
+  }
+
+  checkIfRestart() {
+    console.log('koko');
+
+    const popup: HTMLElement | null = document.querySelector('.popup');
+    if (popup) popup?.classList.remove('show-popup');
   }
 }

@@ -28,6 +28,7 @@ main {
   width: 100%;
   margin: 0 auto;
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
 }
@@ -39,7 +40,7 @@ main {
 
 #game-board {
   display: grid;
-
+  /* position: relative; */
   max-width: 800px;
   width: 100%;
   margin: 20px auto;
@@ -125,4 +126,56 @@ main {
 select {
   border-radius: 4px;
   padding: 5px 20px;
+}
+
+.popup {
+  border: 1px solid black;
+  padding: 10px 20px;
+  display: none;
+  flex-direction: column;
+  gap: 180px;
+  background-color: #010409;
+  color: white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  height: 500px;
+  font-size: 20px;
+  margin: 0 auto;
+  position: absolute;
+  top: 0%;
+  left: 10%;
+}
+.show-popup {
+  display: flex;
+}
+
+.game-over {
+  text-align: center;
+}
+
+.game-over p {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #4493f8;
+}
+
+.game-over button {
+  background-color: #47c55c;
+  border-radius: 8px;
+}
+
+.winner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media only screen and (max-width: 400px) {
+  .popup {
+    max-width: 360px;
+    height: 400px;
+    top: 20%;
+    left: 0;
+  }
 }

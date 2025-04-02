@@ -16,6 +16,10 @@ export class PlayerController {
     this.init();
     this.view = view;
     this.utility = new Utility();
+    // const obj1 = new BoardView();
+    // view.checkIfGameOver([
+    //   { id: 1, position: { x: 1, y: 1 }, score: 5, turn: false },
+    // ]);
   }
   init() {
     const startBtn = document.getElementById('start');
@@ -39,18 +43,39 @@ export class PlayerController {
         this.selectGameDifficulty(e);
       });
     }
+    const toggleRestart: HTMLButtonElement | null =
+      document.querySelector('.restart');
+    toggleRestart?.addEventListener('click', () => {
+      toggleRestart.disabled = true;
+    });
+    const restart: HTMLButtonElement | null =
+      document.querySelector('#restart');
+    restart?.addEventListener('click', () => {
+      this.handleRestartGame();
+    });
   }
   createPlayers(totalPlayers: number) {
     for (let i = 0; i < totalPlayers; i++) {
       this.players.push(new Player(i, this.playerPosition[i], 0, i === 0));
     }
   }
+
   handleStart() {
     this.rowAndCol = this.view.getArraySize();
     this.currentGrid = this.getGrid(this.rowAndCol);
+    this.players = [];
     this.createPlayers(this.totalPlayers);
     this.view.displayGame(this.currentGrid, this.players);
   }
+  handleRestartGame() {
+    console.log('ji');
+    const popup: HTMLElement | null = document.querySelector('.popup');
+    if (popup) popup?.classList.remove('show-popup');
+    console.log(this.view);
+
+    this.handleStart();
+  }
+
   handleController(e: Event) {
     const currentPlayer = this.players.find((player) => player.turn);
     if (currentPlayer) {
@@ -119,9 +144,15 @@ export class PlayerController {
   }
   updateScoreAndGrid(grid: Array<number[]>, player: Player) {
     const obj = this.utility.addScore(grid, player);
-    this.currentGrid = obj.arr;
-    player = obj.player;
-    this.handleTurn();
+    if (obj.arr[0]!.length === 0) {
+      console.log('llll');
+
+      this.view.checkIfGameOver(this.players);
+    } else {
+      this.currentGrid = obj.arr;
+      player = obj.player;
+      this.handleTurn();
+    }
   }
   totalNoOfPlayers(e: Event) {
     this.totalPlayers = this.view.totalPlayers(e);
