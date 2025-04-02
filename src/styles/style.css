@@ -77,6 +77,16 @@ main {
   content: 'hih';
 }
 
+#controller {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+ 
+#controller img {
+  border: 1px solid black;
+  width: 40px;
+}
 @media only screen and (min-width: 600px) {
   .grid-item {
     width: 40px;

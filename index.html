@@ -23,12 +23,27 @@
         <option value="3">3</option>
         <option value="4">4</option>
       </select>
+      <button id="start">Start</button>
     </div>
 
     <main>
       <div class="scores"></div>
       <div class="turn"></div>
       <div id="game-board"></div>
+      <div id="controller">
+        <button class="up" name="up">
+          <img src="./src/assets/up.svg" alt="Move Up" />
+        </button>
+        <button class="down" name="down">
+          <img src="./src/assets/down.svg" alt="Move Down" />
+        </button>
+        <button class="left" name="left">
+          <img src="./src/assets/left.svg" alt="Move Left" />
+        </button>
+        <button class="right" name="right">
+          <img src="./src/assets/right.svg" alt="Move Right" />
+        </button>
+      </div>
     </main>
   </body>
   <script type="module" src="./src/index.ts"></script>

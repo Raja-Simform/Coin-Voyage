@@ -9,8 +9,8 @@ import {
   MEDIUM_MATRIX_ROWS,
   NUMBER_OF_DEFAULT_USERS,
 } from '../constants';
-import { Board } from '../models/GameBoardModel';
-import { Player } from '../models/PlayerModel';
+import { Board } from '../model/GameBoardModel';
+import { Player } from '../model/player';
 
 export class BoardView {
   public difficultySelection: HTMLElement;
@@ -71,16 +71,10 @@ export class BoardView {
     if (turn) turn.textContent = 'Turn:';
   }
 
-  totalPlayers(): number {
-    const numberOfPlayers: HTMLSelectElement | null =
-      document.querySelector('#players');
-    if (numberOfPlayers) {
-      numberOfPlayers.addEventListener('change', (e) => {
-        const target = e.target;
-        if (target instanceof HTMLSelectElement) {
-          return target.value;
-        }
-      });
+  totalPlayers(e: Event): number {
+    const target = e.target;
+    if (target instanceof HTMLSelectElement) {
+      return Number(target.value);
     }
     return NUMBER_OF_DEFAULT_USERS;
   }
