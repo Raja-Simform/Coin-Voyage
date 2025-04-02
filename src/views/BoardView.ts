@@ -95,9 +95,7 @@ export class BoardView {
           for (let k = 0; k < player.length; k++) {
             if (player[k].position.x === i && player[k].position.y === j) {
               console.log('enter');
-              cell.innerHTML = `
-              <div class="player-icon">
-              </div>`;
+              cell.innerHTML = "<img src='./src/assets/"+`player${player[k].id}.svg'`+'/>';
               gameBoard.appendChild(cell);
             }
           }

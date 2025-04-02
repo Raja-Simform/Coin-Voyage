@@ -69,7 +69,7 @@ export class PlayerController {
   }
   handleOperations(e: Event, player: Player) {
     if (e.target instanceof HTMLButtonElement) {
-      const typeOfControl = e.target.name;
+      const typeOfControl = e.target.closest('button')?.name;
       switch (typeOfControl) {
         case CONTROLS.UP: {
           if (player.position.x === 0) {
