@@ -68,10 +68,10 @@ export class BoardView {
       for (let i = 0; i < player.length; i++) {
         const playerScore = document.createElement('li');
         playerScore.style.display = 'flex';
-        const PlayerImageDiv = document.createElement('div');
-        PlayerImageDiv.className = 'player-icon';
-        PlayerImageDiv.id = `player${player[i].id}`;
-        playerScore.append(PlayerImageDiv, `: ${player[i].score}`);
+        const playerImageDiv = document.createElement('div');
+        playerImageDiv.className = 'player-icon';
+        playerImageDiv.id = `player${player[i].id}`;
+        playerScore.append(playerImageDiv, `: ${player[i].score}`);
         score.append(playerScore);
       }
     }

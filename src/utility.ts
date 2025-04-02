@@ -67,5 +67,13 @@ export class Utility{
         }
         return {arr,player};
     }
+    checkposition(player:Player[],x:number,y:number){
+         for(let i=0;i<player.length;i++){
+            if(player[i].position.x===x && player[i].position.y===y){
+               return false;
+            }
+         }
+         return true;
+    }
 
 }
