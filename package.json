@@ -7,7 +7,7 @@
     "start": "parcel ./index.html ",
     "prepare": "husky",
     "lint": "eslint src",
-    "build": "parcel build ./index.html --public-url ./"
+    "build": "parcel build ./index.html --public-url ./ --no-autoinstall --no-optimize "
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "husky": "^9.1.7",
     "parcel": "^2.14.4",
     "prettier": "3.5.3",
+    "svgo": "^3.3.2",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.28.0"
   },
