@@ -59,26 +59,26 @@ main {
 #player0 {
   height: 15px;
   width: 15px;
-  background: url('data-url:../assets/player0.svg');
+  background: url('../assets/player0.svg');
   background-size: contain;
 }
 
 #player1 {
   height: 15px;
   width: 15px;
-  background: url('data-url:../assets/player1.svg');
+  background: url('../assets/player1.svg');
   background-size: contain;
 }
 #player2 {
   height: 15px;
   width: 15px;
-  background: url('data-url:../assets/player2.svg');
+  background: url('../assets/player2.svg');
   background-size: contain;
 }
 #player3 {
   height: 15px;
   width: 15px;
-  background: url('data-url:../assets/player3.svg');
+  background: url('../assets/player3.svg');
   background-size: contain;
 }
 

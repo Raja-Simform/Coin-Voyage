@@ -8,9 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     gameControlContainer.addEventListener('click', (e: Event) => {
       playerController.handleController(e);
     });
-    // gameControlContainer.addEventListener('keypress', (e: KeyboardEvent) => {
-    //   playerController.handleControllerViaKeyboard(e);
-    // });
   }
   const startBtn = document.getElementById('start');
   if (startBtn) {

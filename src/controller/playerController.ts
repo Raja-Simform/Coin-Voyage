@@ -31,51 +31,14 @@ export class PlayerController {
     const currentPlayer = this.players.find((player) => player.turn)!;
     this.handleOperations(e, currentPlayer);
   }
-  handleControllerViaKeyboard(e: KeyboardEvent) {
-    this.players.forEach((player: Player) => {
-      if (player.turn === true) {
-        this.handleKeyOperations(e, player);
-      }
-    });
-  }
-  handleKeyOperations(e: KeyboardEvent, player: Player) {
-    const key = e.key;
-    switch (key) {
-      case '37': {
-        player.position.y -= 1;
-        this.updateScoreAndGrid(this.currentGrid, player);
-        this.view.displayGame(this.currentGrid, this.players);
-        break;
-      }
-      case '38': {
-        player.position.x -= 1;
-        this.updateScoreAndGrid(this.currentGrid, player);
-        this.view.displayGame(this.currentGrid, this.players);
-        break;
-      }
-      case '39': {
-        player.position.y += 1;
-        this.updateScoreAndGrid(this.currentGrid, player);
-        this.view.displayGame(this.currentGrid, this.players);
-        break;
-      }
-      case '40': {
-        player.position.x += 1;
-        this.updateScoreAndGrid(this.currentGrid, player);
-        this.view.displayGame(this.currentGrid, this.players);
-        break;
-      }
-    }
-  }
   handleOperations(e: Event, player: Player) {
-    if (e.target instanceof HTMLButtonElement) {
+    if (e.target instanceof HTMLElement) {
       const typeOfControl = e.target.closest('button')?.name;
       switch (typeOfControl) {
         case CONTROLS.UP: {
           if (player.position.x === 0) {
-            e.target.disabled = true;
+            alert("You can't go up now!");
           } else {
-            e.target.disabled = false;
             player.position.x -= 1;
             this.updateScoreAndGrid(this.currentGrid, player);
             this.view.displayGame(this.currentGrid, this.players);
@@ -84,9 +47,8 @@ export class PlayerController {
         }
         case CONTROLS.DOWN: {
           if (player.position.x === this.rowAndCol.row - 1) {
-            e.target.disabled = true;
+            alert("You can't go down now!");
           } else {
-            e.target.disabled = false;
             player.position.x += 1;
             this.updateScoreAndGrid(this.currentGrid, player);
             this.view.displayGame(this.currentGrid, this.players);
@@ -95,9 +57,8 @@ export class PlayerController {
         }
         case CONTROLS.LEFT: {
           if (player.position.y === 0) {
-            e.target.disabled = true;
+            alert("You can't go left now!");
           } else {
-            e.target.disabled = false;
             player.position.y -= 1;
             this.updateScoreAndGrid(this.currentGrid, player);
             this.view.displayGame(this.currentGrid, this.players);
@@ -106,9 +67,8 @@ export class PlayerController {
         }
         case CONTROLS.RIGHT: {
           if (player.position.y === this.rowAndCol.column - 1) {
-            e.target.disabled = true;
+            alert("You can't go right now!");
           } else {
-            e.target.disabled = false;
             player.position.y += 1;
             this.updateScoreAndGrid(this.currentGrid, player);
             this.view.displayGame(this.currentGrid, this.players);

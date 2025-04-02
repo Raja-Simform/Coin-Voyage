@@ -8,7 +8,7 @@ import {
   MEDIUM_MATRIX_COLUMNS,
   MEDIUM_MATRIX_ROWS,
   NUMBER_OF_DEFAULT_USERS,
-} from '../constants';
+} from '../constants/constants';
 import { Board } from '../model/GameBoardModel';
 import { Player } from '../model/player';
 
@@ -61,32 +61,10 @@ export class BoardView {
     }
   }
 
-  displayScore(player: Player[]) {
-    const score = document.querySelector('.scores');
-    if (score) {
-      score.textContent = 'Scores:';
-      for (let i = 0; i < player.length; i++) {
-        const playerScore = document.createElement('li');
-        playerScore.style.display = 'flex';
-        const PlayerImageDiv = document.createElement('div');
-        PlayerImageDiv.className = 'player-icon';
-        PlayerImageDiv.id = `player${player[i].id}`;
-        playerScore.append(PlayerImageDiv, `: ${player[i].score}`);
-        score.append(playerScore);
-      }
-    }
-  }
-
   displayTurn(players: Array<Player>) {
     const turn = document.querySelector('.turn');
     if (turn) {
-      // if (turn.hasChildNodes()) turn.firstChild?.remove();
-      // turn.append('Turn:');
       const player = players.find((player) => player.turn);
-      // const PlayerImageDiv = document.createElement('div');
-      // PlayerImageDiv.className = 'player-icon';
-      // PlayerImageDiv.id = `player${player?.id}`;
-      // turn.append(PlayerImageDiv);
       turn.innerHTML = `
         Turn: <div id="player${player?.id}" class="player-icon"></div>
       `;
@@ -137,7 +115,6 @@ export class BoardView {
 
   displayGame(coins: number[][], player: Array<Player>) {
     this.createGameBoard(coins, player);
-    this.displayScore(player);
     this.displayTurn(player);
     this.displayController();
   }
