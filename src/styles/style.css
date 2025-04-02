@@ -38,14 +38,14 @@ main {
   margin: 0 10px;
 }
 
-.difficulty-selection,
+/* .difficulty-selection,
 .select-players {
   max-width: 600px;
   width: 100%;
   margin: 20px auto;
   display: flex;
   justify-content: space-around;
-}
+} */
 
 #game-board {
   display: grid;
@@ -57,7 +57,7 @@ main {
 }
 
 .grid-item {
-  background-color: lightblue;
+  /* background-color: lightblue; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,15 +66,26 @@ main {
   font-weight: bold;
 }
 
-.player-icon {
-  border-radius: 50%;
+#player0 {
+  display: flex;
+  position: relative;
+  align-items: center;
   height: 10px;
   width: 10px;
-  color: aqua;
+  /* background: url('data-url:../assets/player1.svg'); */
 }
 
-.player-icon::before {
-  content: 'hih';
+#player0::before {
+  content: '';
+  height: 10px;
+  display: block;
+  width: 10px;
+  background: url('data-url:../assets/player1.svg');
+  z-index: 11;
+}
+
+#player1::before {
+  content: 'p1';
 }
 
 #controller {
@@ -82,7 +93,7 @@ main {
   justify-content: center;
   gap: 5px;
 }
- 
+
 #controller img {
   border: 1px solid black;
   width: 40px;
@@ -92,4 +103,14 @@ main {
     width: 40px;
     height: 40px;
   }
+}
+
+.start-game-requirements {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 650px;
+  gap: 10px;
 }

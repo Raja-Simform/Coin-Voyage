@@ -17,7 +17,7 @@ export class BoardView {
 
   constructor() {
     this.difficultySelection = document.querySelector(
-      '.difficulty-selection',
+      '#difficulty-selection',
     ) as HTMLInputElement;
   }
 
@@ -26,7 +26,7 @@ export class BoardView {
   init() {
     if (this.difficultySelection) {
       this.difficultySelection.addEventListener(
-        'click',
+        'change',
         this.selectGameDifficulty,
       );
     }
@@ -53,8 +53,8 @@ export class BoardView {
 
   selectGameDifficulty(e: Event) {
     const target = e.target;
-    if (target instanceof HTMLElement) {
-      const btnValue = target.closest('button')?.value;
+    if (target instanceof HTMLSelectElement) {
+      const btnValue = target.value;
       if (btnValue) {
         this.difficulty = btnValue;
       }
@@ -96,7 +96,7 @@ export class BoardView {
             if (player[k].position.x === i && player[k].position.y === j) {
               console.log('enter');
               cell.innerHTML = `
-              <div class="player-icon">
+              <div class="player-icon" id=player${player[k].id}>
               </div>`;
               gameBoard.appendChild(cell);
             }
