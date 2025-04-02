@@ -14,3 +14,9 @@ export const EASY = 'Easy';
 export const MEDIUM = 'Medium';
 export const HARD = 'Hard';
 export const NUMBER_OF_DEFAULT_USERS = 2;
+export const ERROR = {
+    UP: "You can't go up now!",
+    DOWN: "You can't go down now!",
+    RIGHT: "You can't go right now!",
+    LEFT: "You can't go left now!",
+}

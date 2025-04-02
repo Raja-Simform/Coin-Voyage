@@ -9,25 +9,4 @@ document.addEventListener('DOMContentLoaded', () => {
       playerController.handleController(e);
     });
   }
-  const startBtn = document.getElementById('start');
-  if (startBtn) {
-    startBtn.addEventListener('click', () => {
-      playerController.handleStart();
-    });
-  }
-  const numberOfPlayers: HTMLSelectElement | null =
-    document.querySelector('#players');
-  if (numberOfPlayers) {
-    numberOfPlayers.addEventListener('change', (e: Event) => {
-      playerController.totalNoOfPlayers(e);
-    });
-  }
-  const difficultySelection = document.querySelector(
-    '.difficulty-selection',
-  ) as HTMLInputElement;
-  if (difficultySelection) {
-    difficultySelection.addEventListener('click', (e: Event) => {
-      playerController.selectGameDifficulty(e);
-    });
-  }
 });
