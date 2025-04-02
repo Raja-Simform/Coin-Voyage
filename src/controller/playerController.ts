@@ -47,7 +47,6 @@ export class PlayerController {
   }
   handleStart() {
     this.rowAndCol = this.view.getArraySize();
-    console.log("calling grid now");
     this.currentGrid = this.getGrid(this.rowAndCol);
     this.createPlayers(this.totalPlayers);
     this.view.displayGame(this.currentGrid, this.players);
