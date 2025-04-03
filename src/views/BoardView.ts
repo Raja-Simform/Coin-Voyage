@@ -169,8 +169,10 @@ export class BoardView {
   checkIfGameOver(player: Player[]) {
     const popup: HTMLElement | null = document.querySelector('.popup');
     let winnerId = -100;
+    let maxScore = -100;
     for (let i = 0; i < player.length; i++) {
-      if (player[i].score > winnerId) {
+      if (player[i].score > maxScore) {
+        maxScore = player[i].score;
         winnerId = player[i].id;
       }
     }
