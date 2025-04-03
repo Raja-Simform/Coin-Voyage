@@ -196,8 +196,6 @@ export class PlayerController {
   updateScoreAndGrid(grid: Array<number[]>, player: Player) {
     const obj = this.utility.addScore(grid, player);
     if (obj.arr[0]!.length === 0) {
-      console.log('llll');
-
       this.view.checkIfGameOver(this.players);
     } else {
       this.currentGrid = obj.arr;

@@ -130,7 +130,6 @@ export class BoardView {
   }
 
   checkIfGameOver(player: Player[]) {
-    console.log(player[0].id);
     const popup: HTMLElement | null = document.querySelector('.popup');
     let winnerId = -100;
     for (let i = 0; i < player.length; i++) {
@@ -148,8 +147,6 @@ export class BoardView {
   }
 
   checkIfRestart() {
-    console.log('koko');
-
     const popup: HTMLElement | null = document.querySelector('.popup');
     if (popup) popup?.classList.remove('show-popup');
   }

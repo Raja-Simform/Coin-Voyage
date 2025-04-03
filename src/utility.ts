@@ -59,7 +59,6 @@ export class Utility {
     this.totalScore -= arr[player.position.x][player.position.y];
     arr[player.position.x][player.position.y] = 0;
     if (this.totalScore === 0) {
-      console.log('game over');
       arr = [[]];
       return { arr, player };
     }
