@@ -65,6 +65,10 @@ export class PlayerController {
           if (player.position.x === 0) {
             alert(ERROR.UP);
           } else {
+            if(!this.utility.checkposition(this.players, player.position.x-1,player.position.y)){
+                 alert(ERROR.UP)
+                 break;
+            }
             player.position.x -= 1;
             this.updateScoreAndGrid(this.currentGrid, player);
             this.view.displayGame(this.currentGrid, this.players);
@@ -75,6 +79,10 @@ export class PlayerController {
           if (player.position.x === this.rowAndCol.row - 1) {
             alert(ERROR.DOWN);
           } else {
+            if(!this.utility.checkposition(this.players, player.position.x+1,player.position.y)){
+              alert(ERROR.DOWN)
+              break;
+            }
             player.position.x += 1;
             this.updateScoreAndGrid(this.currentGrid, player);
             this.view.displayGame(this.currentGrid, this.players);
@@ -85,6 +93,10 @@ export class PlayerController {
           if (player.position.y === 0) {
             alert(ERROR.LEFT);
           } else {
+            if(!this.utility.checkposition(this.players, player.position.x,player.position.y-1)){
+              alert(ERROR.LEFT);
+              break;
+            }
             player.position.y -= 1;
             this.updateScoreAndGrid(this.currentGrid, player);
             this.view.displayGame(this.currentGrid, this.players);
@@ -95,6 +107,10 @@ export class PlayerController {
           if (player.position.y === this.rowAndCol.column - 1) {
             alert(ERROR.RIGHT);
           } else {
+            if(!this.utility.checkposition(this.players, player.position.x,player.position.y+1)){
+              alert(ERROR.RIGHT);
+              break;
+            }
             player.position.y += 1;
             this.updateScoreAndGrid(this.currentGrid, player);
             this.view.displayGame(this.currentGrid, this.players);
