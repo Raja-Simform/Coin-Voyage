@@ -48,9 +48,36 @@ export class PlayerController {
   handleStart() {
     this.rowAndCol = this.view.getArraySize();
     this.currentGrid = this.getGrid(this.rowAndCol);
+    this.players = [];
     this.createPlayers(this.totalPlayers);
+    // const restart = document.querySelector('#restart') as HTMLButtonElement;
+    // if (restart) {
+    //   console.log(restart);
+    //   restart.disabled = false;
+    // }
+    // const start = document.querySelector('#start') as HTMLButtonElement;
+    // if (start) {
+    //   start.disabled = true;
+    // }
     this.view.displayGame(this.currentGrid, this.players);
   }
+  handleRestartGame() {
+    console.log('ji');
+    const popup: HTMLElement | null = document.querySelector('.popup');
+    if (popup) popup?.classList.remove('show-popup');
+    console.log(this.view);
+
+    this.handleStart();
+    // const restart = document.querySelector('#restart') as HTMLButtonElement;
+    // if (restart) {
+    //   restart.disabled = true;
+    // }
+    // const start = document.querySelector('#start') as HTMLButtonElement;
+    // if (start) {
+    //   start.disabled = false;
+    // }
+  }
+
   handleController(e: Event) {
     const currentPlayer = this.players.find((player) => player.turn);
     if (currentPlayer) {
@@ -65,9 +92,15 @@ export class PlayerController {
           if (player.position.x === 0) {
             alert(ERROR.UP);
           } else {
-            if(!this.utility.checkposition(this.players, player.position.x-1,player.position.y)){
-                 alert(ERROR.UP)
-                 break;
+            if (
+              !this.utility.checkposition(
+                this.players,
+                player.position.x - 1,
+                player.position.y,
+              )
+            ) {
+              alert(ERROR.UP);
+              break;
             }
             player.position.x -= 1;
             this.updateScoreAndGrid(this.currentGrid, player);
@@ -79,8 +112,14 @@ export class PlayerController {
           if (player.position.x === this.rowAndCol.row - 1) {
             alert(ERROR.DOWN);
           } else {
-            if(!this.utility.checkposition(this.players, player.position.x+1,player.position.y)){
-              alert(ERROR.DOWN)
+            if (
+              !this.utility.checkposition(
+                this.players,
+                player.position.x + 1,
+                player.position.y,
+              )
+            ) {
+              alert(ERROR.DOWN);
               break;
             }
             player.position.x += 1;
@@ -93,7 +132,13 @@ export class PlayerController {
           if (player.position.y === 0) {
             alert(ERROR.LEFT);
           } else {
-            if(!this.utility.checkposition(this.players, player.position.x,player.position.y-1)){
+            if (
+              !this.utility.checkposition(
+                this.players,
+                player.position.x,
+                player.position.y - 1,
+              )
+            ) {
               alert(ERROR.LEFT);
               break;
             }
@@ -107,7 +152,13 @@ export class PlayerController {
           if (player.position.y === this.rowAndCol.column - 1) {
             alert(ERROR.RIGHT);
           } else {
-            if(!this.utility.checkposition(this.players, player.position.x,player.position.y+1)){
+            if (
+              !this.utility.checkposition(
+                this.players,
+                player.position.x,
+                player.position.y + 1,
+              )
+            ) {
               alert(ERROR.RIGHT);
               break;
             }
@@ -123,7 +174,7 @@ export class PlayerController {
   getGrid(arrObj: GridRowAndCol) {
     const coinGrid = this.utility.generateGridCoin(arrObj);
     this.playerPosition = this.utility.genrateRandom(this.totalPlayers, arrObj);
-    return this.utility.clearPosition(this.playerPosition,coinGrid)
+    return this.utility.clearPosition(this.playerPosition, coinGrid);
   }
   handleTurn() {
     const currentIndex = this.players.findIndex((player) => player.turn);
