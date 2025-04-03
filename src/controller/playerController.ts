@@ -24,6 +24,14 @@ export class PlayerController {
         this.handleStart();
       });
     }
+    const goToMainMenu: HTMLButtonElement | null =
+      document.querySelector('.main-restart');
+    goToMainMenu?.addEventListener('click', this.showMainMenu);
+    const restart: HTMLButtonElement | null =
+      document.querySelector('#restart');
+    restart?.addEventListener('click', () => {
+      this.handleRestartGame();
+    });
     const numberOfPlayers: HTMLSelectElement | null =
       document.querySelector('#players');
     if (numberOfPlayers) {
@@ -50,32 +58,33 @@ export class PlayerController {
     this.currentGrid = this.getGrid(this.rowAndCol);
     this.players = [];
     this.createPlayers(this.totalPlayers);
-    // const restart = document.querySelector('#restart') as HTMLButtonElement;
-    // if (restart) {
-    //   console.log(restart);
-    //   restart.disabled = false;
-    // }
-    // const start = document.querySelector('#start') as HTMLButtonElement;
-    // if (start) {
-    //   start.disabled = true;
-    // }
     this.view.displayGame(this.currentGrid, this.players);
+    this.hideGameRequirements();
   }
+
+  hideGameRequirements() {
+    const gameStartRequirements: HTMLDivElement | null = document.querySelector(
+      '.start-game-requirements',
+    );
+    if (gameStartRequirements) {
+      gameStartRequirements.style.display = 'none';
+    }
+  }
+
+  showMainMenu() {
+    const gameStartRequirements: HTMLDivElement | null = document.querySelector(
+      '.start-game-requirements',
+    );
+    if (gameStartRequirements) {
+      gameStartRequirements.style.display = 'flex';
+    }
+  }
+
   handleRestartGame() {
-    console.log('ji');
     const popup: HTMLElement | null = document.querySelector('.popup');
     if (popup) popup?.classList.remove('show-popup');
-    console.log(this.view);
 
     this.handleStart();
-    // const restart = document.querySelector('#restart') as HTMLButtonElement;
-    // if (restart) {
-    //   restart.disabled = true;
-    // }
-    // const start = document.querySelector('#start') as HTMLButtonElement;
-    // if (start) {
-    //   start.disabled = false;
-    // }
   }
 
   handleController(e: Event) {
@@ -186,9 +195,15 @@ export class PlayerController {
   }
   updateScoreAndGrid(grid: Array<number[]>, player: Player) {
     const obj = this.utility.addScore(grid, player);
-    this.currentGrid = obj.arr;
-    player = obj.player;
-    this.handleTurn();
+    if (obj.arr[0]!.length === 0) {
+      console.log('llll');
+
+      this.view.checkIfGameOver(this.players);
+    } else {
+      this.currentGrid = obj.arr;
+      player = obj.player;
+      this.handleTurn();
+    }
   }
   totalNoOfPlayers(e: Event) {
     this.totalPlayers = this.view.totalPlayers(e);

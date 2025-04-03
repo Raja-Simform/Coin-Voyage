@@ -9,48 +9,64 @@
   <body>
     <nav>
       <a href="#">Coin-Voyage</a>
-      <button class="main-restart">Restart</button>
+      <button class="main-restart">Go to main Menu</button>
     </nav>
-    <div class="start-game-requirements">
-      <div class="difficulty-selection">
-        <label for="difficulty">Select difficulty level:</label>
-        <select name="players" id="difficulty-selection">
-          <option hidden>Difficulty level</option>
-          <option value="Easy">Easy</option>
-          <option value="Medium">Medium</option>
-          <option value="Hard">Hard</option>
-        </select>
-      </div>
-      <div class="select-players">
-        <label for="players">Select number of players:</label>
-        <select name="players" id="players">
-          <option hidden>Players</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
-      </div>
+    <div class="start-game-wrapper">
+      <div class="start-game-requirements">
+        <div class="difficulty-selection">
+          <label for="difficulty">Select difficulty level:</label>
+          <select name="players" id="difficulty-selection">
+            <option hidden>Difficulty level</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+        </div>
+        <div class="select-players">
+          <label for="players">Select number of players:</label>
+          <select name="players" id="players">
+            <option hidden>Players</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
 
-      <button id="start">Start</button>
+        <button id="start">Start</button>
+      </div>
     </div>
 
     <main>
-      <ul class="scores"></ul>
-      <ul class="turn"></ul>
+      <div class="player-info">
+        <ul class="scores"></ul>
+        <ul class="turn"></ul>
+      </div>
       <div id="game-board"></div>
       <div id="controller">
-        <button class="up" name="up">
-          <img src="./src/assets/up.svg" alt="Move Up" />
-        </button>
-        <button class="down" name="down">
-          <img src="./src/assets/down.svg" alt="Move Down" />
-        </button>
-        <button class="left" name="left">
-          <img src="./src/assets/left.svg" alt="Move Left" />
-        </button>
-        <button class="right" name="right">
-          <img src="./src/assets/right.svg" alt="Move Right" />
-        </button>
+        <div class="up-arrow">
+          <button class="up" name="up">
+            <img src="./src/assets/up.svg" alt="Move Up" />
+          </button>
+        </div>
+        <div class="below-controller">
+          <button class="left" name="left">
+            <img src="./src/assets/left.svg" alt="Move Left" />
+          </button>
+          <button class="down" name="down">
+            <img src="./src/assets/down.svg" alt="Move Down" />
+          </button>
+
+          <button class="right" name="right">
+            <img src="./src/assets/right.svg" alt="Move Right" />
+          </button>
+        </div>
+      </div>
+      <div class="popup">
+        <div class="winner">Winner:<span class="winnerOfGame"></span></div>
+        <div class="game-over">
+          <p>The Game is Over</p>
+          <button id="restart">Restart the Game?</button>
+        </div>
       </div>
     </main>
   </body>
