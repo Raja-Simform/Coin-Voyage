@@ -13,26 +13,50 @@
     </nav>
     <div class="start-game-wrapper">
       <div class="start-game-requirements">
-        <div class="difficulty-selection">
-          <label for="difficulty">Select difficulty level:</label>
-          <select name="players" id="difficulty-selection">
-            <option hidden>Difficulty level</option>
-            <option value="Easy">Easy</option>
-            <option value="Medium">Medium</option>
-            <option value="Hard">Hard</option>
-          </select>
+        <div class="how-to-play">
+          <h1>How to Play?</h1>
+          <h2>Objective:</h2>
+          <ul>
+            <li>
+              Collect as many coins as possible! The player with the highest
+              score at the end wins. Game Rules:
+            </li>
+            <li>
+              Players take turns moving across the grid. - Move up (↑), down
+              (↓), left (←), or right (→) to collect coins.
+            </li>
+            <li>
+              Coins have different values:
+              <p>1 Point</p>
+              <p>3 Points</p>
+              <p>5 Points</p>
+              The game ends when all coins are collected.
+            </li>
+            <li>The player with the highest score wins!</li>
+          </ul>
         </div>
-        <div class="select-players">
-          <label for="players">Select number of players:</label>
-          <select name="players" id="players">
-            <option hidden>Players</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-        </div>
+        <div class="selection-for-user">
+          <div class="difficulty-selection">
+            <label for="difficulty">Select difficulty level:</label>
+            <select name="players" id="difficulty-selection">
+              <option hidden>Difficulty level</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
+          </div>
+          <div class="select-players">
+            <label for="players">Select number of players:</label>
+            <select name="players" id="players">
+              <option hidden>Players</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
 
-        <button id="start">Start</button>
+          <button id="start">Start</button>
+        </div>
       </div>
     </div>
 
