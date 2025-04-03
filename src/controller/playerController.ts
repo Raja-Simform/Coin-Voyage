@@ -1,4 +1,4 @@
-import { CONTROLS, ERROR,ARROWCONTROLS } from '../constants/constants';
+import { CONTROLS, ERROR, ARROWCONTROLS } from '../constants/constants';
 import { Player, Position } from '../model/player';
 import { Utility } from '../utility';
 import { BoardView } from '../views/BoardView';
@@ -111,7 +111,8 @@ export class PlayerController {
   handleRestartGame() {
     const popup: HTMLElement | null = document.querySelector('.popup');
     if (popup) popup?.classList.remove('show-popup');
-
+    this.players = [];
+    this.currentGrid = [];
     this.handleStart();
   }
 
@@ -121,8 +122,6 @@ export class PlayerController {
       this.handleOperations(e, currentPlayer);
     }
   }
-
-  //added below--comments to be removed by mohit
 
   handleOperations(e: Event, player: Player) {
     if (e.target instanceof HTMLElement) {
@@ -144,19 +143,17 @@ export class PlayerController {
     }
   }
 
-  movePlayer(player:Player,x:number,y:number,error:string){
-    let row=(player.position.x+x);
-    let col=(player.position.y+y);
+  movePlayer(player: Player, x: number, y: number, error: string) {
+    let row = player.position.x + x;
+    let col = player.position.y + y;
 
-    if(x<0 && player.position.x ===0){
-      row=this.rowAndCol.row+x;
-    }
-    else if(y<0 && player.position.y===0){
-      col=this.rowAndCol.column+y;
-    }
-    else{
-       row=(player.position.x+x)%this.rowAndCol.row;
-       col=(player.position.y+y)%this.rowAndCol.column;
+    if (x < 0 && player.position.x === 0) {
+      row = this.rowAndCol.row + x;
+    } else if (y < 0 && player.position.y === 0) {
+      col = this.rowAndCol.column + y;
+    } else {
+      row = (player.position.x + x) % this.rowAndCol.row;
+      col = (player.position.y + y) % this.rowAndCol.column;
     }
     if (!this.utility.checkposition(this.players, row, col)) {
       alert(error);
@@ -164,8 +161,8 @@ export class PlayerController {
     }
     player.position.x = row;
     player.position.y = col;
-    this.updateScoreAndGrid(this.currentGrid,player);
-    this.view.displayGame(this.currentGrid,this.players);
+    this.updateScoreAndGrid(this.currentGrid, player);
+    this.view.displayGame(this.currentGrid, this.players);
   }
 
   getGrid(arrObj: GridRowAndCol) {
@@ -204,7 +201,7 @@ export class PlayerController {
   selectGameDifficulty(e: Event) {
     this.view.selectGameDifficulty(e);
   }
-  //changed below
+
   handleKeyControl(e: KeyboardEvent) {
     const currPlayer = this.players.find((player) => player.turn);
     if (!currPlayer) {

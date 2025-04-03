@@ -305,4 +305,8 @@ h2 {
   display: flex;
   gap: var(--gap);
 }
- 
+
+.scores,
+.turn {
+  font-size: var(--large-gap);
+}

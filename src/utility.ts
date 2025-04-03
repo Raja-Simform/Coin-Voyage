@@ -1,5 +1,5 @@
 import { Player, Position } from './model/player';
-import { MAGNET_LEVELS,MAGNET_COIN } from './constants/constants';
+import { MAGNET_LEVELS, MAGNET_COIN } from './constants/constants';
 type RowAndColumn = { row: number; column: number };
 export class Utility {
   private totalScore: number = 0;
@@ -137,13 +137,13 @@ export class Utility {
         arr[neighbourRow][neighbourColumn] = 0;
         if (this.totalScore === 0) {
           arr = [[]];
-         
+
           return { arr, player };
         }
       }
       noOfLevels -= 1;
     }
-   
+
     return { arr, player };
   }
   generateRandomColour() {

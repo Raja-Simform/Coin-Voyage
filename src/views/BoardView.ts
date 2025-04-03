@@ -1,14 +1,16 @@
 import {
+  COIN_SVG,
   EASY,
   EASY_MATRIX_COLUMNS,
   EASY_MATRIX_ROWS,
   HARD_MATRIX_COLUMNS,
   HARD_MATRIX_ROWS,
+  MAGNET_COIN,
   MEDIUM,
   MEDIUM_MATRIX_COLUMNS,
   MEDIUM_MATRIX_ROWS,
   NUMBER_OF_DEFAULT_USERS,
-  MAGNET_COIN
+  PLAYER_SVG,
 } from '../constants/constants';
 import { Board } from '../model/GameBoardModel';
 import { Player } from '../model/player';
@@ -128,9 +130,14 @@ export class BoardView {
             if (coins[i][j] === 0) {
               cell.style.backgroundColor = '#E9E9E9';
             }
-            cell.textContent = coins[i][j].toString();
+            if (coins[i][j] === 0) {
+              cell.innerHTML = '';
+            } else {
+              cell.innerHTML = this.modifyCoinSVG(coins[i][j]);
+            }
             gameBoard.appendChild(cell);
           }
+          const currentPlayer = player.find((player) => player.turn);
           for (let k = 0; k < player.length; k++) {
             if (player[k].position.x === i && player[k].position.y === j) {
               const svgEl = this.modifyColour(player[k]);
@@ -138,7 +145,14 @@ export class BoardView {
               <div class="player-icon">
                 ${svgEl}
               </div>`;
-              cell.style.backgroundColor = '#ADD8E6';
+              if (
+                currentPlayer?.position.x === i &&
+                currentPlayer.position.y === j
+              ) {
+                cell.style.backgroundColor = '#E7DDFF';
+              } else {
+                cell.style.backgroundColor = '#ADD8E6';
+              }
               gameBoard.appendChild(cell);
             }
           }
@@ -148,8 +162,7 @@ export class BoardView {
   }
 
   modifyColour(players: Player) {
-    const svgString =
-      '<svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60.671 60.671" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <ellipse style="fill:#ff0000;" cx="30.336" cy="12.097" rx="11.997" ry="12.097"></ellipse> <path style="fill:#ff0000;" d="M35.64,30.079H25.031c-7.021,0-12.714,5.739-12.714,12.821v17.771h36.037V42.9 C48.354,35.818,42.661,30.079,35.64,30.079z"></path> </g> </g> </g></svg>';
+    const svgString = PLAYER_SVG;
     return svgString.replace(/fill:#ff0000/g, `fill:${players.colour}`);
   }
 
@@ -163,11 +176,28 @@ export class BoardView {
     }
     const winner = document.querySelector('.winnerOfGame');
     if (winner) {
-      winner.innerHTML = `
-            <div id="player${winnerId}" class="player-icon"></div>
+      winner.innerHTML = `${this.modifyColour(player[winnerId])}
+           
           `;
     }
+    const allScores = document.querySelector('.allScores');
+    if (allScores) {
+      allScores.innerHTML = '';
+      for (let i = 0; i < player.length; i++) {
+        const li = document.createElement('li');
+        li.innerHTML = `${this.modifyColour(player[i])} ${player[i].score}`;
+        allScores.append(li);
+      }
+    }
     popup?.classList.add('show-popup');
+  }
+
+  modifyCoinSVG(coinValue: number) {
+    const coinSvg = COIN_SVG;
+    return coinSvg.replace(
+      '<text x="18" y="20" font-size="10" font-weight="bold" text-anchor="middle" fill="#3B2900">1</text>',
+      `<text x="18" y="20" font-size="10" font-weight="bold" text-anchor="middle" fill="#3B2900">${coinValue}</text>`,
+    );
   }
 
   checkIfRestart() {
