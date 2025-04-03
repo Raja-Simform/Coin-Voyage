@@ -67,7 +67,6 @@ export class Utility {
   }
 
   getGridWithMagnetCoins(grid:Array<number[]>){
-    // const newgrid=structuredClone(grid);
     let count=0;
     const ct1 = Math.floor(Math.random()*3);
     for(let i=0;i<grid.length;i++){
@@ -80,7 +79,6 @@ export class Utility {
                     grid[i][j]=10;
                     count++;
                 }
-                console.log(grid[i][j]);
             }
             if(count===ct1){
                 break;

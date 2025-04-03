@@ -47,7 +47,11 @@ export class PlayerController {
         this.selectGameDifficulty(e);
       });
     }
+    document.addEventListener('keydown',(e:KeyboardEvent)=>{
+      this.handleKeyContol(e);
+    })
   }
+  
   createPlayers(totalPlayers: number) {
     for (let i = 0; i < totalPlayers; i++) {
       this.players.push(new Player(i, this.playerPosition[i], 0, i === 0));
@@ -219,5 +223,32 @@ export class PlayerController {
   }
   selectGameDifficulty(e: Event) {
     this.view.selectGameDifficulty(e);
+  }
+
+  handleKeyContol(e:KeyboardEvent){
+    const currPlayer = this.players.find((player) => player.turn);
+    if(!currPlayer){
+      return;
+    }
+    const btn=document.createElement('button');
+    switch(e.key){
+      case 'ArrowUp':
+        btn.name=CONTROLS.UP;
+        break;
+      case 'ArrowDown':
+          btn.name=CONTROLS.DOWN;
+          break;
+      case 'ArrowLeft':
+          btn.name=CONTROLS.LEFT;
+          break;
+      case 'ArrowRight':
+          btn.name=CONTROLS.RIGHT;
+          break;
+      default:
+        return;              
+    }
+    const event=new Event('click');
+    Object.defineProperty(event,'target',{value:btn});
+    this.handleOperations(event,currPlayer);
   }
 }

@@ -8,5 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     gameControlContainer.addEventListener('click', (e: Event) => {
       playerController.handleController(e);
     });
+    
   }
 });
