@@ -54,36 +54,35 @@ export class Utility {
     }
     return arr;
   }
-  
-  getcleargrid(arr:Array<number[]>){
-        for(let i=0;i<arr.length;i++){
-            for(let j=0;j<arr[i].length;j++){
-                if(arr[i][j]===-1){
-                    arr[i][j]=0;
-                }
-            }
+
+  getcleargrid(arr: Array<number[]>) {
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < arr[i].length; j++) {
+        if (arr[i][j] === -1) {
+          arr[i][j] = 0;
         }
-        return arr;
+      }
+    }
+    return arr;
   }
 
-  getGridWithMagnetCoins(grid:Array<number[]>){
-    let count=0;
-    const ct1 = Math.floor(Math.random()*3);
-    for(let i=0;i<grid.length;i++){
-        for(let j=0;j<grid[0].length;j++){
-           
-            const randomNumber = Math.floor(Math.random()*10);
-            if(randomNumber%7 === 0 && count<2){
-                if(grid[i][j] !== -1){
-                    this.totalScore-=grid[i][j];
-                    grid[i][j]=10;
-                    count++;
-                }
-            }
-            if(count===ct1){
-                break;
-            }
+  getGridWithMagnetCoins(grid: Array<number[]>) {
+    let count = 0;
+    const ct1 = Math.floor(Math.random() * 3);
+    for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid[0].length; j++) {
+        const randomNumber = Math.floor(Math.random() * 10);
+        if (randomNumber % 7 === 0 && count < 2) {
+          if (grid[i][j] !== -1) {
+            this.totalScore -= grid[i][j];
+            grid[i][j] = 10;
+            count++;
+          }
         }
+        if (count === ct1) {
+          break;
+        }
+      }
     }
     return grid;
   }
@@ -115,13 +114,17 @@ export class Utility {
     const directionRows = [-1, +1, 0, 0];
     const directionColumns = [0, 0, +1, -1];
     let noOfLevels = MAGNET_LEVELS;
-    arr[player.position.x][player.position.y]=0;
+    arr[player.position.x][player.position.y] = 0;
     while (noOfLevels) {
       for (let i = 0; i < 4; i++) {
         const neighbourRow = player.position.x + directionRows[i];
         const neighbourColumn = player.position.y + directionColumns[i];
 
-        if (neighbourRow < 0 || neighbourColumn < 0 || arr[neighbourRow][neighbourColumn]===10) {
+        if (
+          neighbourRow < 0 ||
+          neighbourColumn < 0 ||
+          arr[neighbourRow][neighbourColumn] === 10
+        ) {
           continue;
         }
         if (
@@ -133,22 +136,21 @@ export class Utility {
         player.score += arr[neighbourRow][neighbourColumn];
         this.totalScore -= arr[neighbourRow][neighbourColumn];
         arr[neighbourRow][neighbourColumn] = 0;
-        if(this.totalScore === 0){
-            arr = [[]];
-            console.log(this.totalScore);
-            return {arr,player}
+        if (this.totalScore === 0) {
+          arr = [[]];
+          console.log(this.totalScore);
+          return { arr, player };
         }
       }
       noOfLevels -= 1;
     }
     console.log(this.totalScore);
-    return{arr,player};
+    return { arr, player };
   }
-  generateRandomColour(){
-    const r = Math.random()*256;
-    const g = Math.random()*256;
-    const b = Math.random()*256;
+  generateRandomColour() {
+    const r = Math.random() * 256;
+    const g = Math.random() * 256;
+    const b = Math.random() * 256;
     return `rgb(${r},${g},${b})`;
   }
- 
 }

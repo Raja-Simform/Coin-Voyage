@@ -247,6 +247,12 @@ h2 {
   margin-top: 20px;
   margin-bottom: var(--gap);
 }
+#magnet {
+  height: 15px;
+  width: 15px;
+  background: url('../assets/magnet-svgrepo-com.svg');
+  background-size: contain;
+}
 
 .player-icon {
   display: flex;
@@ -269,12 +275,4 @@ h2 {
 .up-arrow button,
 .below-controller button {
   border-radius: var(--sm-border-radius);
-}
- 
-
-#magnet{
-  height: 15px;
-  width: 15px;
-  background: url('../assets/magnet-svgrepo-com.svg');
-  background-size: contain;
 }

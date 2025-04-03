@@ -47,14 +47,22 @@ export class PlayerController {
         this.selectGameDifficulty(e);
       });
     }
-    document.addEventListener('keydown',(e:KeyboardEvent)=>{
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
       this.handleKeyContol(e);
-    })
+    });
   }
-  
+
   createPlayers(totalPlayers: number) {
     for (let i = 0; i < totalPlayers; i++) {
-      this.players.push(new Player(i, this.playerPosition[i], 0, i === 0,this.utility.generateRandomColour()));
+      this.players.push(
+        new Player(
+          i,
+          this.playerPosition[i],
+          0,
+          i === 0,
+          this.utility.generateRandomColour(),
+        ),
+      );
     }
   }
   handleStart() {
@@ -62,10 +70,10 @@ export class PlayerController {
     this.currentGrid = this.getGrid(this.rowAndCol);
     this.players = [];
     this.createPlayers(this.totalPlayers);
-    this.currentGrid=this.utility.getcleargrid(this.currentGrid);
+    this.currentGrid = this.utility.getcleargrid(this.currentGrid);
     this.view.displayGame(this.currentGrid, this.players);
     this.hideGameRequirements();
-    
+    this.showMainComponent();
   }
 
   hideGameRequirements() {
@@ -77,12 +85,21 @@ export class PlayerController {
     }
   }
 
+  showMainComponent() {
+    const mainComponent: HTMLElement | null = document.querySelector('main');
+
+    if (mainComponent) mainComponent.style.display = 'flex';
+  }
+
   showMainMenu() {
     const gameStartRequirements: HTMLDivElement | null = document.querySelector(
       '.start-game-requirements',
     );
+    const mainComponent: HTMLElement | null = document.querySelector('main');
+
     if (gameStartRequirements) {
       gameStartRequirements.style.display = 'flex';
+      if (mainComponent) mainComponent.style.display = 'none';
     }
   }
 
@@ -119,7 +136,7 @@ export class PlayerController {
               break;
             }
             player.position.x -= 1;
-            
+
             this.updateScoreAndGrid(this.currentGrid, player);
             this.view.displayGame(this.currentGrid, this.players);
           }
@@ -191,7 +208,7 @@ export class PlayerController {
   getGrid(arrObj: GridRowAndCol) {
     const coinGrid = this.utility.generateGridCoin(arrObj);
     this.playerPosition = this.utility.genrateRandom(this.totalPlayers, arrObj);
-    const grid2=this.utility.clearPosition(this.playerPosition, coinGrid);
+    const grid2 = this.utility.clearPosition(this.playerPosition, coinGrid);
     return this.utility.getGridWithMagnetCoins(grid2);
   }
   handleTurn() {
@@ -204,13 +221,12 @@ export class PlayerController {
   }
   updateScoreAndGrid(grid: Array<number[]>, player: Player) {
     let obj;
-    if(grid[player.position.x][player.position.y]===10){
-      obj=this.utility.addNeighbourCoinScore(grid,player,this.rowAndCol);
-    }
-    else{
+    if (grid[player.position.x][player.position.y] === 10) {
+      obj = this.utility.addNeighbourCoinScore(grid, player, this.rowAndCol);
+    } else {
       obj = this.utility.addScore(grid, player);
     }
-    
+
     if (obj.arr[0]!.length === 0) {
       this.view.checkIfGameOver(this.players);
     } else {
@@ -226,30 +242,30 @@ export class PlayerController {
     this.view.selectGameDifficulty(e);
   }
 
-  handleKeyContol(e:KeyboardEvent){
+  handleKeyContol(e: KeyboardEvent) {
     const currPlayer = this.players.find((player) => player.turn);
-    if(!currPlayer){
+    if (!currPlayer) {
       return;
     }
-    const btn=document.createElement('button');
-    switch(e.key){
+    const btn = document.createElement('button');
+    switch (e.key) {
       case 'ArrowUp':
-        btn.name=CONTROLS.UP;
+        btn.name = CONTROLS.UP;
         break;
       case 'ArrowDown':
-          btn.name=CONTROLS.DOWN;
-          break;
+        btn.name = CONTROLS.DOWN;
+        break;
       case 'ArrowLeft':
-          btn.name=CONTROLS.LEFT;
-          break;
+        btn.name = CONTROLS.LEFT;
+        break;
       case 'ArrowRight':
-          btn.name=CONTROLS.RIGHT;
-          break;
+        btn.name = CONTROLS.RIGHT;
+        break;
       default:
-        return;              
+        return;
     }
-    const event=new Event('click');
-    Object.defineProperty(event,'target',{value:btn});
-    this.handleOperations(event,currPlayer);
+    const event = new Event('click');
+    Object.defineProperty(event, 'target', { value: btn });
+    this.handleOperations(event, currPlayer);
   }
 }
