@@ -24,6 +24,14 @@ export class PlayerController {
         this.handleStart();
       });
     }
+    const goToMainMenu: HTMLButtonElement | null =
+      document.querySelector('.main-restart');
+    goToMainMenu?.addEventListener('click', this.showMainMenu);
+    const restart: HTMLButtonElement | null =
+      document.querySelector('#restart');
+    restart?.addEventListener('click', () => {
+      this.handleRestartGame();
+    });
     const numberOfPlayers: HTMLSelectElement | null =
       document.querySelector('#players');
     if (numberOfPlayers) {
@@ -48,9 +56,37 @@ export class PlayerController {
   handleStart() {
     this.rowAndCol = this.view.getArraySize();
     this.currentGrid = this.getGrid(this.rowAndCol);
+    this.players = [];
     this.createPlayers(this.totalPlayers);
     this.view.displayGame(this.currentGrid, this.players);
+    this.hideGameRequirements();
   }
+
+  hideGameRequirements() {
+    const gameStartRequirements: HTMLDivElement | null = document.querySelector(
+      '.start-game-requirements',
+    );
+    if (gameStartRequirements) {
+      gameStartRequirements.style.display = 'none';
+    }
+  }
+
+  showMainMenu() {
+    const gameStartRequirements: HTMLDivElement | null = document.querySelector(
+      '.start-game-requirements',
+    );
+    if (gameStartRequirements) {
+      gameStartRequirements.style.display = 'flex';
+    }
+  }
+
+  handleRestartGame() {
+    const popup: HTMLElement | null = document.querySelector('.popup');
+    if (popup) popup?.classList.remove('show-popup');
+
+    this.handleStart();
+  }
+
   handleController(e: Event) {
     const currentPlayer = this.players.find((player) => player.turn);
     if (currentPlayer) {
@@ -65,9 +101,15 @@ export class PlayerController {
           if (player.position.x === 0) {
             alert(ERROR.UP);
           } else {
-            if(!this.utility.checkposition(this.players, player.position.x-1,player.position.y)){
-                 alert(ERROR.UP)
-                 break;
+            if (
+              !this.utility.checkposition(
+                this.players,
+                player.position.x - 1,
+                player.position.y,
+              )
+            ) {
+              alert(ERROR.UP);
+              break;
             }
             player.position.x -= 1;
             this.updateScoreAndGrid(this.currentGrid, player);
@@ -79,8 +121,14 @@ export class PlayerController {
           if (player.position.x === this.rowAndCol.row - 1) {
             alert(ERROR.DOWN);
           } else {
-            if(!this.utility.checkposition(this.players, player.position.x+1,player.position.y)){
-              alert(ERROR.DOWN)
+            if (
+              !this.utility.checkposition(
+                this.players,
+                player.position.x + 1,
+                player.position.y,
+              )
+            ) {
+              alert(ERROR.DOWN);
               break;
             }
             player.position.x += 1;
@@ -93,7 +141,13 @@ export class PlayerController {
           if (player.position.y === 0) {
             alert(ERROR.LEFT);
           } else {
-            if(!this.utility.checkposition(this.players, player.position.x,player.position.y-1)){
+            if (
+              !this.utility.checkposition(
+                this.players,
+                player.position.x,
+                player.position.y - 1,
+              )
+            ) {
               alert(ERROR.LEFT);
               break;
             }
@@ -107,7 +161,13 @@ export class PlayerController {
           if (player.position.y === this.rowAndCol.column - 1) {
             alert(ERROR.RIGHT);
           } else {
-            if(!this.utility.checkposition(this.players, player.position.x,player.position.y+1)){
+            if (
+              !this.utility.checkposition(
+                this.players,
+                player.position.x,
+                player.position.y + 1,
+              )
+            ) {
               alert(ERROR.RIGHT);
               break;
             }
@@ -123,7 +183,7 @@ export class PlayerController {
   getGrid(arrObj: GridRowAndCol) {
     const coinGrid = this.utility.generateGridCoin(arrObj);
     this.playerPosition = this.utility.genrateRandom(this.totalPlayers, arrObj);
-    return this.utility.clearPosition(this.playerPosition,coinGrid)
+    return this.utility.clearPosition(this.playerPosition, coinGrid);
   }
   handleTurn() {
     const currentIndex = this.players.findIndex((player) => player.turn);
@@ -135,9 +195,13 @@ export class PlayerController {
   }
   updateScoreAndGrid(grid: Array<number[]>, player: Player) {
     const obj = this.utility.addScore(grid, player);
-    this.currentGrid = obj.arr;
-    player = obj.player;
-    this.handleTurn();
+    if (obj.arr[0]!.length === 0) {
+      this.view.checkIfGameOver(this.players);
+    } else {
+      this.currentGrid = obj.arr;
+      player = obj.player;
+      this.handleTurn();
+    }
   }
   totalNoOfPlayers(e: Event) {
     this.totalPlayers = this.view.totalPlayers(e);

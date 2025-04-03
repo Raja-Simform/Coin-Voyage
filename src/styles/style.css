@@ -1,3 +1,14 @@
+:root {
+  --primary-black: black;
+  --logo-fonts: 26px;
+  --gap: 10px;
+  --primary-width: 600px;
+  --lg-border-radius: 16px;
+  --sm-border-radius: 8px;
+  --primary-margin: 20px auto;
+  --primary-green: rgb(28, 126, 4);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,18 +16,18 @@
 }
 
 nav {
-  background-color: black;
+  background-color: var(--primary-black);
   display: flex;
   align-items: center;
   justify-content: space-around;
   padding: 20px;
-  gap: 10px;
+  gap: var(--gap);
 }
 
 a {
   text-decoration: none;
   color: white;
-  font-size: 26px;
+  font-size: var(--logo-fonts);
 }
 
 button {
@@ -24,25 +35,26 @@ button {
 }
 
 main {
-  max-width: 600px;
+  max-width: var(--primary-width);
   width: 100%;
-  margin: 0 auto;
+  margin: var(--primary-margin);
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
 }
 
 .scores,
 .turn {
-  margin: 0 10px;
+  margin-left: var(--gap);
+  margin-right: var(--gap);
 }
 
 #game-board {
   display: grid;
-
   max-width: 800px;
   width: 100%;
-  margin: 20px auto;
+  margin: var(--primary-margin);
   justify-content: center;
 }
 
@@ -85,11 +97,17 @@ main {
 #controller {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: 5px;
 }
 
 #controller img {
   width: 40px;
+}
+#restart:disabled,
+#start:disabled {
+  background-color: red;
 }
 @media only screen and (min-width: 600px) {
   .grid-item {
@@ -102,20 +120,20 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin: 20px auto;
+  margin: var(--primary-margin);
   width: 100%;
   max-width: 650px;
   gap: 20px;
-  border: 1px solid black;
-  padding: 10px;
-  border-radius: 16px;
+  border: 1px solid var(--primary-black);
+  padding: var(--gap);
+  border-radius: var(--lg-border-radius);
 }
 
 #start {
-  background-color: rgb(28, 126, 4);
+  background-color: var(--primary-green);
   width: 50px;
   color: white;
-  border-radius: 8px;
+  border-radius: var(--sm-border-radius);
 }
 
 #controller {
@@ -125,4 +143,90 @@ main {
 select {
   border-radius: 4px;
   padding: 5px 20px;
+}
+
+.popup {
+  border: 1px solid var(--primary-black);
+  padding: 10px 20px;
+  display: none;
+  flex-direction: column;
+  gap: 180px;
+  background-color: #010409;
+  color: white;
+  border-radius: var(--lg-border-radius);
+  width: 100%;
+  max-width: 400px;
+  height: 500px;
+  font-size: 20px;
+  margin: 0 auto;
+  position: absolute;
+  top: 0%;
+  left: 10%;
+}
+.show-popup {
+  display: flex;
+}
+
+.game-over {
+  text-align: center;
+}
+
+.game-over p {
+  margin-bottom: var(--gap);
+  font-weight: bold;
+  color: #4493f8;
+}
+
+.game-over button {
+  background-color: #47c55c;
+  border-radius: var(--sm-border-radius);
+}
+
+.winner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media only screen and (max-width: 450px) {
+  .popup {
+    max-width: 400px;
+    height: 400px;
+    top: 28%;
+    left: var(--gap);
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 416px) {
+  .popup {
+    max-width: 360px;
+    height: 400px;
+    top: 28%;
+    left: 0;
+    width: 100%;
+  }
+  label {
+    font-size: 14px;
+  }
+}
+
+button {
+  cursor: pointer;
+  color: white;
+}
+
+.main-restart {
+  background-color: var(--primary-green);
+  border-radius: var(--sm-border-radius);
+}
+
+.player-info {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+
+.start-game-wrapper {
+  padding: 10px;
 }
