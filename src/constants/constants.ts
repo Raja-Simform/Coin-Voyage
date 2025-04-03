@@ -4,6 +4,15 @@ export const CONTROLS = {
   RIGHT: 'right',
   LEFT: 'left',
 };
+//changed below
+export const ARROWCONTROLS={
+  ArrowUp:"ArrowUp",
+  ArrowDown:"ArrowDown",
+  ArrowLeft:"ArrowLeft",
+  ArrowRight:"ArrowRight",
+}
+export const MAGNET_COIN=10; 
+export const MAGNET_LEVELS = 1;
 export const EASY_MATRIX_ROWS = 4;
 export const MEDIUM_MATRIX_ROWS = 6;
 export const HARD_MATRIX_ROWS = 8;
