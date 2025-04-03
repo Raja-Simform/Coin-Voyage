@@ -4,6 +4,7 @@ export const CONTROLS = {
   RIGHT: 'right',
   LEFT: 'left',
 };
+export const MAGNET_LEVELS = 1;
 export const EASY_MATRIX_ROWS = 4;
 export const MEDIUM_MATRIX_ROWS = 6;
 export const HARD_MATRIX_ROWS = 8;

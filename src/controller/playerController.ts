@@ -58,6 +58,7 @@ export class PlayerController {
     this.currentGrid = this.getGrid(this.rowAndCol);
     this.players = [];
     this.createPlayers(this.totalPlayers);
+    this.currentGrid=this.utility.getcleargrid(this.currentGrid);
     this.view.displayGame(this.currentGrid, this.players);
     this.hideGameRequirements();
   }
@@ -96,6 +97,7 @@ export class PlayerController {
   handleOperations(e: Event, player: Player) {
     if (e.target instanceof HTMLElement) {
       const typeOfControl = e.target.closest('button')?.name;
+
       switch (typeOfControl) {
         case CONTROLS.UP: {
           if (player.position.x === 0) {
@@ -112,6 +114,7 @@ export class PlayerController {
               break;
             }
             player.position.x -= 1;
+            
             this.updateScoreAndGrid(this.currentGrid, player);
             this.view.displayGame(this.currentGrid, this.players);
           }
@@ -183,7 +186,8 @@ export class PlayerController {
   getGrid(arrObj: GridRowAndCol) {
     const coinGrid = this.utility.generateGridCoin(arrObj);
     this.playerPosition = this.utility.genrateRandom(this.totalPlayers, arrObj);
-    return this.utility.clearPosition(this.playerPosition, coinGrid);
+    const grid2=this.utility.clearPosition(this.playerPosition, coinGrid);
+    return this.utility.getGridWithMagnetCoins(grid2);
   }
   handleTurn() {
     const currentIndex = this.players.findIndex((player) => player.turn);
@@ -194,7 +198,14 @@ export class PlayerController {
     }
   }
   updateScoreAndGrid(grid: Array<number[]>, player: Player) {
-    const obj = this.utility.addScore(grid, player);
+    let obj;
+    if(grid[player.position.x][player.position.y]===10){
+      obj=this.utility.addNeighbourCoinScore(grid,player,this.rowAndCol);
+    }
+    else{
+      obj = this.utility.addScore(grid, player);
+    }
+    
     if (obj.arr[0]!.length === 0) {
       this.view.checkIfGameOver(this.players);
     } else {

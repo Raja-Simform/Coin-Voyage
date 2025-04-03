@@ -110,12 +110,22 @@ export class BoardView {
       gameBoard.innerHTML = '';
       gameBoard.style.gridTemplateColumns = `repeat(${coins.length}, 40px)`;
       gameBoard.style.gridTemplateRows = `repeat(${coins[0].length}, 40px)`;
+      console.log(coins);
       for (let i = 0; i < coins.length; i++) {
         for (let j = 0; j < coins[i].length; j++) {
           const cell = document.createElement('div');
           cell.classList.add('grid-item');
-          cell.textContent = coins[i][j].toString();
-          gameBoard.appendChild(cell);
+          if(coins[i][j]===10){
+            cell.innerHTML = `
+            <div id=magnet>
+            </div>`;
+            gameBoard.appendChild(cell);
+            
+          }
+          else{
+            cell.textContent = coins[i][j].toString();
+             gameBoard.appendChild(cell);
+          }
           for (let k = 0; k < player.length; k++) {
             if (player[k].position.x === i && player[k].position.y === j) {
               cell.innerHTML = `

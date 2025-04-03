@@ -93,7 +93,12 @@ main {
   background: url('../assets/player3.svg');
   background-size: contain;
 }
-
+#magnet{
+  height: 15px;
+  width: 15px;
+  background: url('../assets/magnet-svgrepo-com.svg');
+  background-size: contain;
+}
 #controller {
   display: flex;
   justify-content: center;
