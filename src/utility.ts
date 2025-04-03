@@ -1,5 +1,5 @@
 import { Player, Position } from './model/player';
-import { MAGNET_LEVELS } from './constants/constants';
+import { MAGNET_LEVELS,MAGNET_COIN } from './constants/constants';
 type RowAndColumn = { row: number; column: number };
 export class Utility {
   private totalScore: number = 0;
@@ -75,7 +75,7 @@ export class Utility {
         if (randomNumber % 7 === 0 && count < 2) {
           if (grid[i][j] !== -1) {
             this.totalScore -= grid[i][j];
-            grid[i][j] = 10;
+            grid[i][j] = MAGNET_COIN;
             count++;
           }
         }
@@ -110,7 +110,6 @@ export class Utility {
     player: Player,
     rowAndColumn: RowAndColumn,
   ) {
-    console.log(this.totalScore);
     const directionRows = [-1, +1, 0, 0];
     const directionColumns = [0, 0, +1, -1];
     let noOfLevels = MAGNET_LEVELS;
@@ -123,7 +122,7 @@ export class Utility {
         if (
           neighbourRow < 0 ||
           neighbourColumn < 0 ||
-          arr[neighbourRow][neighbourColumn] === 10
+          arr[neighbourRow][neighbourColumn] === MAGNET_COIN
         ) {
           continue;
         }
@@ -138,13 +137,13 @@ export class Utility {
         arr[neighbourRow][neighbourColumn] = 0;
         if (this.totalScore === 0) {
           arr = [[]];
-          console.log(this.totalScore);
+         
           return { arr, player };
         }
       }
       noOfLevels -= 1;
     }
-    console.log(this.totalScore);
+   
     return { arr, player };
   }
   generateRandomColour() {

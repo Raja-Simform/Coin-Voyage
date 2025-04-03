@@ -8,6 +8,7 @@ import {
   MEDIUM_MATRIX_COLUMNS,
   MEDIUM_MATRIX_ROWS,
   NUMBER_OF_DEFAULT_USERS,
+  MAGNET_COIN
 } from '../constants/constants';
 import { Board } from '../model/GameBoardModel';
 import { Player } from '../model/player';
@@ -118,7 +119,7 @@ export class BoardView {
         for (let j = 0; j < coins[i].length; j++) {
           const cell = document.createElement('div');
           cell.classList.add('grid-item');
-          if (coins[i][j] === 10) {
+          if (coins[i][j] === MAGNET_COIN) {
             cell.innerHTML = `
             <div id=magnet>
             </div>`;

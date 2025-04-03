@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Honk&display=swap');
+
 :root {
   --primary-black: black;
   --logo-fonts: 26px;
@@ -7,6 +9,10 @@
   --sm-border-radius: 8px;
   --primary-margin: 20px auto;
   --primary-green: rgb(28, 126, 4);
+  --large-gap: 20px;
+  --body-bg-color: #0d1117;
+  --primary-white: white;
+  --min-width-content: 40px;
 }
 
 * {
@@ -15,19 +21,32 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: var(--body-bg-color);
+  color: var(--primary-white);
+}
+
 nav {
   background-color: var(--primary-black);
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 20px;
+  padding: var(--large-gap);
   gap: var(--gap);
 }
 
 a {
+  font-family: 'Honk', system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: 42px;
+  font-style: normal;
+  font-variation-settings:
+    'MORF' 15,
+    'SHLN' 50;
   text-decoration: none;
-  color: white;
-  font-size: var(--logo-fonts);
+  color: var(--primary-white);
+  /* font-size: var(--logo-fonts); */
 }
 
 button {
@@ -53,6 +72,7 @@ main {
 #game-board {
   display: grid;
   max-width: 800px;
+  mix-blend-mode: difference;
   width: 100%;
   margin: var(--primary-margin);
   justify-content: center;
@@ -68,32 +88,6 @@ main {
   font-weight: bold;
 }
 
-/* #player0 {
-  height: 15px;
-  width: 15px;
-  background: url('../assets/player0.svg');
-  background-size: contain;
-}
-
-#player1 {
-  height: 15px;
-  width: 15px;
-  background: url('../assets/player1.svg');
-  background-size: contain;
-}
-#player2 {
-  height: 15px;
-  width: 15px;
-  background: url('../assets/player2.svg');
-  background-size: contain;
-}
-#player3 {
-  height: 15px;
-  width: 15px;
-  background: url('../assets/player3.svg');
-  background-size: contain;
-} */
-
 #controller {
   display: flex;
   justify-content: center;
@@ -103,16 +97,13 @@ main {
 }
 
 #controller img {
-  width: 40px;
+  width: var(--min-width-content);
 }
-#restart:disabled,
-#start:disabled {
-  background-color: red;
-}
+
 @media only screen and (min-width: 600px) {
   .grid-item {
-    width: 40px;
-    height: 40px;
+    width: var(--min-width-content);
+    height: var(--min-width-content);
   }
 }
 
@@ -123,17 +114,18 @@ main {
   margin: var(--primary-margin);
   width: 100%;
   max-width: 650px;
-  gap: 20px;
-  border: 1px solid var(--primary-black);
+  gap: var(--large-gap);
+  border: 1px solid var(--primary-white);
   padding: var(--gap);
   border-radius: var(--lg-border-radius);
 }
 
 #start {
   background-color: var(--primary-green);
-  width: 50px;
-  color: white;
+  width: 80px;
+  color: var(--primary-white);
   border-radius: var(--sm-border-radius);
+  padding: var(--gap);
 }
 
 #controller {
@@ -146,21 +138,24 @@ select {
 }
 
 .popup {
-  border: 1px solid var(--primary-black);
+  border: 1px solid var(--primary-white);
   padding: 10px 20px;
   display: none;
   flex-direction: column;
-  gap: 180px;
+  gap: 50px;
   background-color: #010409;
-  color: white;
+  color: var(--primary-white);
   border-radius: var(--lg-border-radius);
   width: 100%;
   max-width: 400px;
   height: 500px;
-  font-size: 20px;
+  font-size: var(--large-gap);
   margin: 0 auto;
   position: absolute;
   top: 0%;
+  justify-content: center;
+  align-items: center;
+  gap: var(--large-gap);
   left: 10%;
 }
 .show-popup {
@@ -186,24 +181,39 @@ select {
   display: flex;
   align-items: center;
   gap: 10px;
+  font-size: 40px;
+}
+
+.winner::before,
+.winner::after {
+  content: '🎉';
+}
+.winner svg {
+  width: 30px;
+
+  height: 30px;
 }
 
 @media only screen and (max-width: 450px) {
   .popup {
     max-width: 400px;
-    height: 400px;
-    top: 28%;
+    height: 500px;
+    top: 0%;
     left: var(--gap);
     width: 100%;
+  }
+  a {
+    font-size: var(--logo-fonts);
   }
 }
 @media only screen and (max-width: 416px) {
   .popup {
     max-width: 360px;
-    height: 400px;
-    top: 28%;
+    height: 500px;
+    top: 0%;
     left: 0;
     width: 100%;
+    /* left: 10px; */
   }
   label {
     font-size: 14px;
@@ -212,19 +222,20 @@ select {
 
 button {
   cursor: pointer;
-  color: white;
+  color: var(--primary-white);
 }
 
 .main-restart {
   background-color: var(--primary-green);
   border-radius: var(--sm-border-radius);
+  padding: var(--gap);
 }
 
 .player-info {
   display: flex;
   align-items: baseline;
   justify-content: space-evenly;
-  gap: 20px;
+  gap: var(--large-gap);
 }
 
 .start-game-wrapper {
@@ -236,15 +247,15 @@ button {
 }
 
 .how-to-play {
-  padding: 20px;
+  padding: var(--large-gap);
 }
 
 .how-to-play ul {
-  margin-left: 20px;
+  margin-left: var(--large-gap);
 }
 
 h2 {
-  margin-top: 20px;
+  margin-top: var(--large-gap);
   margin-bottom: var(--gap);
 }
 #magnet {
@@ -266,7 +277,7 @@ h2 {
 }
 
 .selection-for-user {
-  margin-left: 20px;
+  margin-left: var(--large-gap);
   display: flex;
   gap: var(--gap);
   flex-direction: column;
@@ -276,3 +287,22 @@ h2 {
 .below-controller button {
   border-radius: var(--sm-border-radius);
 }
+
+.scores {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.turn {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+}
+
+.allScores {
+  list-style: none;
+  display: flex;
+  gap: var(--gap);
+}
+ 
