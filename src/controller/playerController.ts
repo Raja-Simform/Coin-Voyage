@@ -54,7 +54,7 @@ export class PlayerController {
   
   createPlayers(totalPlayers: number) {
     for (let i = 0; i < totalPlayers; i++) {
-      this.players.push(new Player(i, this.playerPosition[i], 0, i === 0));
+      this.players.push(new Player(i, this.playerPosition[i], 0, i === 0,this.utility.generateRandomColour()));
     }
   }
   handleStart() {
@@ -65,6 +65,7 @@ export class PlayerController {
     this.currentGrid=this.utility.getcleargrid(this.currentGrid);
     this.view.displayGame(this.currentGrid, this.players);
     this.hideGameRequirements();
+    
   }
 
   hideGameRequirements() {

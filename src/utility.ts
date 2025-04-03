@@ -111,6 +111,7 @@ export class Utility {
     player: Player,
     rowAndColumn: RowAndColumn,
   ) {
+    console.log(this.totalScore);
     const directionRows = [-1, +1, 0, 0];
     const directionColumns = [0, 0, +1, -1];
     let noOfLevels = MAGNET_LEVELS;
@@ -120,7 +121,7 @@ export class Utility {
         const neighbourRow = player.position.x + directionRows[i];
         const neighbourColumn = player.position.y + directionColumns[i];
 
-        if (neighbourRow < 0 || neighbourColumn < 0 && arr[neighbourRow][neighbourColumn]===10) {
+        if (neighbourRow < 0 || neighbourColumn < 0 || arr[neighbourRow][neighbourColumn]===10) {
           continue;
         }
         if (
@@ -133,12 +134,21 @@ export class Utility {
         this.totalScore -= arr[neighbourRow][neighbourColumn];
         arr[neighbourRow][neighbourColumn] = 0;
         if(this.totalScore === 0){
-            arr = [[]]
+            arr = [[]];
+            console.log(this.totalScore);
             return {arr,player}
         }
       }
       noOfLevels -= 1;
     }
+    console.log(this.totalScore);
     return{arr,player};
   }
+  generateRandomColour(){
+    const r = Math.random()*256;
+    const g = Math.random()*256;
+    const b = Math.random()*256;
+    return `rgb(${r},${g},${b})`;
+  }
+ 
 }

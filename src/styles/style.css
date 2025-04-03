@@ -68,7 +68,7 @@ main {
   font-weight: bold;
 }
 
-#player0 {
+/* #player0 {
   height: 15px;
   width: 15px;
   background: url('../assets/player0.svg');
@@ -92,13 +92,8 @@ main {
   width: 15px;
   background: url('../assets/player3.svg');
   background-size: contain;
-}
-#magnet{
-  height: 15px;
-  width: 15px;
-  background: url('../assets/magnet-svgrepo-com.svg');
-  background-size: contain;
-}
+} */
+
 #controller {
   display: flex;
   justify-content: center;
@@ -234,4 +229,52 @@ button {
 
 .start-game-wrapper {
   padding: 10px;
+}
+
+.instruction {
+  font-weight: bold;
+}
+
+.how-to-play {
+  padding: 20px;
+}
+
+.how-to-play ul {
+  margin-left: 20px;
+}
+
+h2 {
+  margin-top: 20px;
+  margin-bottom: var(--gap);
+}
+
+.player-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-icon img {
+  height: 15px;
+  width: 15px;
+}
+
+.selection-for-user {
+  margin-left: 20px;
+  display: flex;
+  gap: var(--gap);
+  flex-direction: column;
+}
+
+.up-arrow button,
+.below-controller button {
+  border-radius: var(--sm-border-radius);
+}
+ 
+
+#magnet{
+  height: 15px;
+  width: 15px;
+  background: url('../assets/magnet-svgrepo-com.svg');
+  background-size: contain;
 }

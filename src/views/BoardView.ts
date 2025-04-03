@@ -61,6 +61,35 @@ export class BoardView {
     }
   }
 
+  // displayScore(player: Player[]) {
+  //   const score = document.querySelector('.scores');
+  //   if (score) {
+  //     score.textContent = 'Scores:';
+  //     for (let i = 0; i < player.length; i++) {
+  //       const playerScore = document.createElement('li');
+  //       playerScore.style.display = 'flex';
+  //       const playerImageDiv = document.createElement('div');
+  //       playerImageDiv.className = 'player-icon';
+  //       playerImageDiv.id = `player${player[i].id}`;
+  //       playerScore.append(playerImageDiv, `: ${player[i].score}`);
+  //       score.append(playerScore);
+  //     }
+  //   }
+  // }
+  
+
+
+
+  // displayTurn(players: Array<Player>) {
+  //   const turn = document.querySelector('.turn');
+  //   if (turn) {
+  //     const player = players.find((player) => player.turn);
+  //     turn.innerHTML = `
+  //       Turn: <div id="player${player?.id}" class="player-icon"></div>
+  //     `;
+  //   }
+  // }
+
   displayScore(player: Player[]) {
     const score = document.querySelector('.scores');
     if (score) {
@@ -69,8 +98,9 @@ export class BoardView {
         const playerScore = document.createElement('li');
         playerScore.style.display = 'flex';
         const playerImageDiv = document.createElement('div');
+        const svgEl = this.modifyColour(player[i])!;
         playerImageDiv.className = 'player-icon';
-        playerImageDiv.id = `player${player[i].id}`;
+        playerImageDiv.innerHTML = svgEl;
         playerScore.append(playerImageDiv, `: ${player[i].score}`);
         score.append(playerScore);
       }
@@ -81,11 +111,15 @@ export class BoardView {
     const turn = document.querySelector('.turn');
     if (turn) {
       const player = players.find((player) => player.turn);
-      turn.innerHTML = `
-        Turn: <div id="player${player?.id}" class="player-icon"></div>
-      `;
+      if(player){
+        const svgEl = this.modifyColour(player)!;
+        turn.innerHTML = `
+          Turn: ${svgEl}
+        `;
+      }
     }
   }
+
 
   totalPlayers(e: Event): number {
     const target = e.target;
@@ -103,6 +137,42 @@ export class BoardView {
     }
   }
 
+  // createGameBoard(coins: number[][], player: Array<Player>) {
+  //   const gameBoard: HTMLDivElement | null =
+  //     document.querySelector('#game-board');
+  //   if (gameBoard) {
+  //     gameBoard.innerHTML = '';
+  //     gameBoard.style.gridTemplateColumns = `repeat(${coins.length}, 40px)`;
+  //     gameBoard.style.gridTemplateRows = `repeat(${coins[0].length}, 40px)`;
+  //     console.log(coins);
+  //     for (let i = 0; i < coins.length; i++) {
+  //       for (let j = 0; j < coins[i].length; j++) {
+  //         const cell = document.createElement('div');
+  //         cell.classList.add('grid-item');
+  //         if(coins[i][j]===10){
+  //           cell.innerHTML = `
+  //           <div id=magnet>
+  //           </div>`;
+  //           gameBoard.appendChild(cell);
+            
+  //         }
+  //         else{
+  //           cell.textContent = coins[i][j].toString();
+  //            gameBoard.appendChild(cell);
+  //         }
+  //         for (let k = 0; k < player.length; k++) {
+  //           if (player[k].position.x === i && player[k].position.y === j) {
+  //             cell.innerHTML = `
+  //             <div class="player-icon" id=player${player[k].id}>
+  //             </div>`;
+  //             gameBoard.appendChild(cell);
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
   createGameBoard(coins: number[][], player: Array<Player>) {
     const gameBoard: HTMLDivElement | null =
       document.querySelector('#game-board');
@@ -110,26 +180,18 @@ export class BoardView {
       gameBoard.innerHTML = '';
       gameBoard.style.gridTemplateColumns = `repeat(${coins.length}, 40px)`;
       gameBoard.style.gridTemplateRows = `repeat(${coins[0].length}, 40px)`;
-      console.log(coins);
       for (let i = 0; i < coins.length; i++) {
         for (let j = 0; j < coins[i].length; j++) {
           const cell = document.createElement('div');
           cell.classList.add('grid-item');
-          if(coins[i][j]===10){
-            cell.innerHTML = `
-            <div id=magnet>
-            </div>`;
-            gameBoard.appendChild(cell);
-            
-          }
-          else{
-            cell.textContent = coins[i][j].toString();
-             gameBoard.appendChild(cell);
-          }
+          cell.textContent = coins[i][j].toString();
+          gameBoard.appendChild(cell);
           for (let k = 0; k < player.length; k++) {
             if (player[k].position.x === i && player[k].position.y === j) {
+              const svgEl = this.modifyColour(player[k]);
               cell.innerHTML = `
-              <div class="player-icon" id=player${player[k].id}>
+              <div class="player-icon">
+                ${svgEl}
               </div>`;
               gameBoard.appendChild(cell);
             }
@@ -137,6 +199,11 @@ export class BoardView {
         }
       }
     }
+  }
+
+  modifyColour(players:Player){
+    const svgString = '<svg height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60.671 60.671" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <ellipse style="fill:#ff0000;" cx="30.336" cy="12.097" rx="11.997" ry="12.097"></ellipse> <path style="fill:#ff0000;" d="M35.64,30.079H25.031c-7.021,0-12.714,5.739-12.714,12.821v17.771h36.037V42.9 C48.354,35.818,42.661,30.079,35.64,30.079z"></path> </g> </g> </g></svg>'
+    return svgString.replace(/fill:#ff0000/g, `fill:${players.colour}`);
   }
 
   checkIfGameOver(player: Player[]) {
