@@ -1,5 +1,8 @@
 import {
+  CELL_BG,
   COIN_SVG,
+  CURRENT_PLAYER_BG,
+  DISABLE_BG,
   EASY,
   EASY_MATRIX_COLUMNS,
   EASY_MATRIX_ROWS,
@@ -128,7 +131,7 @@ export class BoardView {
             gameBoard.appendChild(cell);
           } else {
             if (coins[i][j] === 0) {
-              cell.style.backgroundColor = '#E9E9E9';
+              cell.style.backgroundColor = CELL_BG;
             }
             if (coins[i][j] === 0) {
               cell.innerHTML = '';
@@ -149,9 +152,9 @@ export class BoardView {
                 currentPlayer?.position.x === i &&
                 currentPlayer.position.y === j
               ) {
-                cell.style.backgroundColor = '#E7DDFF';
+                cell.style.backgroundColor = CURRENT_PLAYER_BG;
               } else {
-                cell.style.backgroundColor = '#ADD8E6';
+                cell.style.backgroundColor = DISABLE_BG;
               }
               gameBoard.appendChild(cell);
             }
@@ -192,6 +195,10 @@ export class BoardView {
       }
     }
     popup?.classList.add('show-popup');
+    const mainComponent = document.querySelector('main');
+    if (mainComponent) {
+      mainComponent.style.opacity = '50%';
+    }
   }
 
   modifyCoinSVG(coinValue: number) {

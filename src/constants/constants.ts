@@ -42,3 +42,6 @@ export const COIN_SVG = `<?xml version="1.0" encoding="utf-8"?>
   <!-- Number inside the coin -->
   <text x="18" y="20" font-size="10" font-weight="bold" text-anchor="middle" fill="#3B2900">1</text>
 </svg>`;
+export const CURRENT_PLAYER_BG = '#E7DDFF';
+export const DISABLE_BG = '#ADD8E6';
+export const CELL_BG = '#E9E9E9';

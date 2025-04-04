@@ -91,6 +91,7 @@ export class PlayerController {
     if (mainComponent) {
       if (mainComponent.style.display === 'none') {
         mainComponent.style.display = 'flex';
+        mainComponent.style.opacity = '100%';
       } else if (mainComponent.style.display === 'flex')
         mainComponent.style.display = 'none';
     }
@@ -101,16 +102,25 @@ export class PlayerController {
       '.start-game-requirements',
     );
     const mainComponent: HTMLElement | null = document.querySelector('main');
-
+    const popup: HTMLElement | null = document.querySelector('.popup');
     if (gameStartRequirements) {
       gameStartRequirements.style.display = 'flex';
-      if (mainComponent) mainComponent.style.display = 'none';
+      if (mainComponent) {
+        mainComponent.style.opacity = '100%';
+        mainComponent.style.display = 'none';
+      }
+      if (popup) popup?.classList.remove('show-popup');
     }
   }
 
   handleRestartGame() {
     const popup: HTMLElement | null = document.querySelector('.popup');
     if (popup) popup?.classList.remove('show-popup');
+    const mainComponent = document.querySelector('main');
+    if (mainComponent) {
+      mainComponent.style.opacity = '100%';
+      this.toggleMainComponent();
+    }
     this.players = [];
     this.currentGrid = [];
     this.handleStart();
@@ -143,13 +153,17 @@ export class PlayerController {
     }
   }
 
+  isOutOfGrid(cellIndex: number, playerIndex: number) {
+    return cellIndex < 0 && playerIndex === 0;
+  }
+
   movePlayer(player: Player, x: number, y: number, error: string) {
     let row = player.position.x + x;
     let col = player.position.y + y;
 
-    if (x < 0 && player.position.x === 0) {
+    if (this.isOutOfGrid(x, player.position.x)) {
       row = this.rowAndCol.row + x;
-    } else if (y < 0 && player.position.y === 0) {
+    } else if (this.isOutOfGrid(y, player.position.y)) {
       col = this.rowAndCol.column + y;
     } else {
       row = (player.position.x + x) % this.rowAndCol.row;
